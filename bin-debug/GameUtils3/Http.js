@@ -33,7 +33,7 @@ var GameUtil;
         p.send = function (param, file, loaded, thisObj, url) {
             if (loaded === void 0) { loaded = null; }
             if (thisObj === void 0) { thisObj = null; }
-            if (url === void 0) { url = GameUtil.GameConfig.IP; }
+            if (url === void 0) { url = GameConfig.IP; }
             this.urlRequest.url = "Http://" + url + file;
             this.onLoader = loaded;
             this.thisObj = thisObj;

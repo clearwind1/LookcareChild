@@ -45,7 +45,7 @@ module GameUtil
             //console.log("GameUtil.WaitServerPanel=========",GameUtil.WaitServerPanel.getInstace());
         }
 
-        public send( param:any, file?:string, loaded:Function = null, thisObj:any = null,url:string=GameUtil.GameConfig.IP):void
+        public send( param:any, file?:string, loaded:Function = null, thisObj:any = null,url:string=GameConfig.IP):void
         {
             this.urlRequest.url = "Http://"+url+file;
             this.onLoader = loaded;

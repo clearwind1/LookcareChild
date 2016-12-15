@@ -5,7 +5,7 @@ module GameUtil
 {
     export class MyBitmap extends egret.Bitmap
     {
-        public constructor(texture:egret.Texture,posx:number,posy:number)
+        public constructor(texture:egret.Texture,posx:number=0,posy:number=0)
         {
             super();
             this.init(texture,posx,posy);

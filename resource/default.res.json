@@ -5,7 +5,7 @@
 		"name":"preloading"
 	},
 	{
-		"keys":"startgamebg_jpg,startgamebtn_png",
+		"keys":"startgamebtn_png,startgamebg_png,helpbtn_png,rankbtn_png,settingbtn_png,sharebtn_png,closebtn_png,rankbg_png,bow_png,help_controlimg_png,helpbg_png,helppagepoint_png,helpselect_png,spear_png",
 		"name":"preload"
 	}],
 	"resources":[
@@ -20,13 +20,73 @@
 		"url":"config/description.json"
 	},
 	{
-		"name":"startgamebg_jpg",
-		"type":"image",
-		"url":"assets/startgamebg.jpg"
-	},
-	{
 		"name":"startgamebtn_png",
 		"type":"image",
 		"url":"assets/startgamebtn.png"
+	},
+	{
+		"name":"startgamebg_png",
+		"type":"image",
+		"url":"assets/startgamebg.png"
+	},
+	{
+		"name":"helpbtn_png",
+		"type":"image",
+		"url":"assets/helpbtn.png"
+	},
+	{
+		"name":"rankbtn_png",
+		"type":"image",
+		"url":"assets/rankbtn.png"
+	},
+	{
+		"name":"settingbtn_png",
+		"type":"image",
+		"url":"assets/settingbtn.png"
+	},
+	{
+		"name":"sharebtn_png",
+		"type":"image",
+		"url":"assets/sharebtn.png"
+	},
+	{
+		"name":"closebtn_png",
+		"type":"image",
+		"url":"assets/closebtn.png"
+	},
+	{
+		"name":"rankbg_png",
+		"type":"image",
+		"url":"assets/rankbg.png"
+	},
+	{
+		"name":"bow_png",
+		"type":"image",
+		"url":"assets/bow.png"
+	},
+	{
+		"name":"help_controlimg_png",
+		"type":"image",
+		"url":"assets/help_controlimg.png"
+	},
+	{
+		"name":"helpbg_png",
+		"type":"image",
+		"url":"assets/helpbg.png"
+	},
+	{
+		"name":"helppagepoint_png",
+		"type":"image",
+		"url":"assets/helppagepoint.png"
+	},
+	{
+		"name":"helpselect_png",
+		"type":"image",
+		"url":"assets/helpselect.png"
+	},
+	{
+		"name":"spear_png",
+		"type":"image",
+		"url":"assets/spear.png"
 	}]
 }

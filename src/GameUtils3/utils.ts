@@ -3,52 +3,6 @@
  */
 module GameUtil
 {
-
-    //游戏配置
-    export class GameConfig
-    {
-        public static IP:string = "api.h5.gamexun.com";        //http连接地址
-        public static bRunFPS:boolean = false;              //是否显示FPS
-
-        //场景转换
-        public static NullAction:number = 0;            //无动画
-        public static CrossLeft:number = 1;             //从左往右
-        public static TransAlpha:number = 2;            //淡入淡出
-        public static OpenDoor:number = 3;              //开门方式
-
-        public static DesignWidth:number = 750;
-        public static DesignHeight:number = 1334;
-
-        private stagetY: number = 0;
-
-        public bfirstplay: boolean;
-
-        public constructor()
-        {
-
-        }
-
-        private static _instance: GameConfig = null;
-        public static _i(): GameConfig
-        {
-            if(this._instance == null){
-                this._instance = new GameUtil.GameConfig();
-            }
-
-            return this._instance;
-        }
-
-        public setStageHeight(stagety: number):void
-        {
-            this.stagetY = stagety;
-        }
-        public getSH():number
-        {
-            return this.stagetY;
-        }
-
-    }
-
     /**
      * 创建矩形实心框
      * @param x {number} x轴坐标
@@ -164,9 +118,9 @@ module GameUtil
     {
         egret.localStorage.setItem(key,data);
     }
-    export function readLocalData(key:string)
+    export function readLocalData(key:string):string
     {
-        egret.localStorage.getItem(key);
+        return egret.localStorage.getItem(key);
     }
     export function clearLocalData(key:string) {
         if (key != null) {
@@ -189,8 +143,8 @@ module GameUtil
     }
 
     export function setscreenY(y:number):number{
-        if(y >= GameUtil.GameConfig.DesignHeight/2){
-            return GameConfig._i().getSH() - (GameUtil.GameConfig.DesignHeight-y);
+        if(y >= GameConfig.DesignHeight/2){
+            return GameConfig._i().getSH() - (GameConfig.DesignHeight-y);
         }else
         {
             return y;
@@ -203,7 +157,7 @@ module GameUtil
         return rd;
     }
 
-    export function getredPack(money:number,openid:any,nickNm:string,backfun:Function,cont:any,url:string=GameUtil.GameConfig.IP)
+    export function getredPack(money:number,openid:any,nickNm:string,backfun:Function,cont:any,url:string=GameConfig.IP)
     {
         var ipstr:string = window['getIP'];
 
@@ -233,6 +187,28 @@ module GameUtil
             gameid: 0
         }
         GameUtil.Http.getinstance().send(param, "/weixinpay/pay", backfun, cont,url);
+    }
+
+    /**
+     * 定位相对位置
+     * @param objtarget     要改变位置的对象
+     * @param objfixed      相对位置的对象
+     * @param posx          x轴位置
+     * @param posy          y轴位置
+     * @param anx
+     */
+    export function relativepos(objtarget:any,objfixed:any,posx:number,posy:number,anx:boolean = false)
+    {
+        if(!anx)
+        {
+            objtarget.x = objfixed.x-objfixed.width/2 + posx;
+            objtarget.y = objfixed.y-objfixed.height/2 + posy;
+        }
+    }
+
+    export function tarce(info:any)
+    {
+        console.log('[DEBUG]:'+info);
     }
 
 }

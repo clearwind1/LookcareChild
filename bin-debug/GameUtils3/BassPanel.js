@@ -43,7 +43,7 @@ var GameUtil;
          * @param duration {number} 切换场景的时间
          */
         GameScene.runscene = function (scene, transtype, duration) {
-            if (transtype === void 0) { transtype = GameUtil.GameConfig.NullAction; }
+            if (transtype === void 0) { transtype = GameConfig.NullAction; }
             if (duration === void 0) { duration = 800; }
             if (this.curScene == null) {
                 //console.log("curscenenull");
@@ -51,7 +51,7 @@ var GameUtil;
                 this.MainStage.addChild(this.curScene);
                 return;
             }
-            if (transtype == GameUtil.GameConfig.NullAction) {
+            if (transtype == GameConfig.NullAction) {
                 //console.log("curscenenullaction");
                 if (this.curScene != null) {
                     this.MainStage.removeChild(this.curScene);
@@ -64,17 +64,17 @@ var GameUtil;
                 this.nextScene = scene;
                 this.MainStage.addChild(this.nextScene);
                 //场景动画
-                if (transtype == GameUtil.GameConfig.TransAlpha) {
+                if (transtype == GameConfig.TransAlpha) {
                     this.nextScene.alpha = 0;
                     egret.Tween.get(this.curScene).to({ alpha: 0 }, duration);
                     egret.Tween.get(this.nextScene).to({ alpha: 1 }, duration);
                 }
-                if (transtype == GameUtil.GameConfig.CrossLeft) {
+                if (transtype == GameConfig.CrossLeft) {
                     this.nextScene.x = -this.MainStage.stageWidth;
                     egret.Tween.get(this.curScene).to({ x: this.MainStage.stageWidth }, duration);
                     egret.Tween.get(this.nextScene).to({ x: 0 }, duration);
                 }
-                if (transtype == GameUtil.GameConfig.OpenDoor) {
+                if (transtype == GameConfig.OpenDoor) {
                 }
                 var local = this;
                 egret.setTimeout(function () {

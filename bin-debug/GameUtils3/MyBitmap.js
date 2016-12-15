@@ -6,6 +6,8 @@ var GameUtil;
     var MyBitmap = (function (_super) {
         __extends(MyBitmap, _super);
         function MyBitmap(texture, posx, posy) {
+            if (posx === void 0) { posx = 0; }
+            if (posy === void 0) { posy = 0; }
             _super.call(this);
             this.init(texture, posx, posy);
         }

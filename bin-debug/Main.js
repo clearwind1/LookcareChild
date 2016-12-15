@@ -34,12 +34,36 @@ var Main = (function (_super) {
     }
     var d = __define,c=Main,p=c.prototype;
     p.onAddToStage = function (event) {
-        //设置加载进度界面
-        if (window.screen.availHeight < window.screen.availWidth) {
-            this.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+        PlayerData._i().UserInfo.openid = GameUtil.getQueryString('openid');
+        PlayerData._i().UserInfo.shareopenid = GameUtil.getQueryString('shareopenid');
+        if (!GameConfig.DEBUG) {
+            if (!GameUtil.getQueryString('openid')) {
+                if (GameUtil.getQueryString('shareopenid')) {
+                    window.location.href = 'http://api.h5.gamexun.com/weixin/auth?game_redirecturl=http://bubblefightv02.h5.gamexun.com/&shareopenid=' + GameUtil.getQueryString('shareopenid');
+                }
+                else {
+                    window.location.href = 'http://api.h5.gamexun.com/weixin/auth?game_redirecturl=http://bubblefightv02.h5.gamexun.com/';
+                }
+            }
+            else {
+                if (!GameUtil.getQueryString('shareopenid')) {
+                    PlayerData._i().UserInfo.shareopenid = null;
+                }
+                else {
+                    PlayerData._i().UserInfo.shareopenid = GameUtil.getQueryString('shareopenid');
+                }
+                this.stage.scaleMode = egret.StageScaleMode.FIXED_NARROW;
+                this.stage.setContentSize(GameConfig.DesignWidth, GameConfig.DesignHeight);
+                GameUtil.GameScene.init(this.stage);
+                GameUtil.GameScene.runscene(new GameUtil.LoadingPanel(this.createGameScene, this, 0, 0));
+            }
         }
-        GameUtil.GameScene.init(this.stage);
-        GameUtil.GameScene.runscene(new GameUtil.LoadingPanel(this.createGameScene, this, 0, 0));
+        else {
+            this.stage.scaleMode = egret.StageScaleMode.FIXED_NARROW;
+            this.stage.setContentSize(GameConfig.DesignWidth, GameConfig.DesignHeight);
+            GameUtil.GameScene.init(this.stage);
+            GameUtil.GameScene.runscene(new GameUtil.LoadingPanel(this.createGameScene, this, 0, 0));
+        }
     };
     /**
      * 创建游戏场景
@@ -47,7 +71,7 @@ var Main = (function (_super) {
      */
     p.createGameScene = function () {
         GameUtil.Http.getinstance();
-        GameUtil.GameConfig._i().setStageHeight(this.stage.stageHeight);
+        GameConfig._i().setStageHeight(this.stage.stageHeight);
         GameUtil.GameScene.runscene(new StartGameScene());
     };
     return Main;

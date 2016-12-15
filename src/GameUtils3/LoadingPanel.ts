@@ -37,7 +37,17 @@ module GameUtil
         {
             //RES.getResByUrl(this.imageUrl,this.onComplete,this,RES.ResourceItem.TYPE_IMAGE);
             new GameUtil.LoadingLogopre(this.onComplete,this);
+            this.loadsound();
         }
+        private loadsound()
+        {
+            for(var i:number=0;i < SoundName.end;i++)
+            {
+                var soundname = GameConfig.SoundName[i];
+                GameData._i().gamesound[i] = new MySound(soundname);
+            }
+        }
+
         private onComplete(event:any):void
         {
             //console.log("onComplete");

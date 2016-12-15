@@ -3,38 +3,6 @@
  */
 var GameUtil;
 (function (GameUtil) {
-    //游戏配置
-    var GameConfig = (function () {
-        function GameConfig() {
-            this.stagetY = 0;
-        }
-        var d = __define,c=GameConfig,p=c.prototype;
-        GameConfig._i = function () {
-            if (this._instance == null) {
-                this._instance = new GameUtil.GameConfig();
-            }
-            return this._instance;
-        };
-        p.setStageHeight = function (stagety) {
-            this.stagetY = stagety;
-        };
-        p.getSH = function () {
-            return this.stagetY;
-        };
-        GameConfig.IP = "api.h5.gamexun.com"; //http连接地址
-        GameConfig.bRunFPS = false; //是否显示FPS
-        //场景转换
-        GameConfig.NullAction = 0; //无动画
-        GameConfig.CrossLeft = 1; //从左往右
-        GameConfig.TransAlpha = 2; //淡入淡出
-        GameConfig.OpenDoor = 3; //开门方式
-        GameConfig.DesignWidth = 750;
-        GameConfig.DesignHeight = 1334;
-        GameConfig._instance = null;
-        return GameConfig;
-    }());
-    GameUtil.GameConfig = GameConfig;
-    egret.registerClass(GameConfig,'GameUtil.GameConfig');
     /**
      * 创建矩形实心框
      * @param x {number} x轴坐标
@@ -142,7 +110,7 @@ var GameUtil;
     }
     GameUtil.saveLocalData = saveLocalData;
     function readLocalData(key) {
-        egret.localStorage.getItem(key);
+        return egret.localStorage.getItem(key);
     }
     GameUtil.readLocalData = readLocalData;
     function clearLocalData(key) {
@@ -167,8 +135,8 @@ var GameUtil;
     }
     GameUtil.getQueryString = getQueryString;
     function setscreenY(y) {
-        if (y >= GameUtil.GameConfig.DesignHeight / 2) {
-            return GameConfig._i().getSH() - (GameUtil.GameConfig.DesignHeight - y);
+        if (y >= GameConfig.DesignHeight / 2) {
+            return GameConfig._i().getSH() - (GameConfig.DesignHeight - y);
         }
         else {
             return y;
@@ -181,7 +149,7 @@ var GameUtil;
     }
     GameUtil.getRandom = getRandom;
     function getredPack(money, openid, nickNm, backfun, cont, url) {
-        if (url === void 0) { url = GameUtil.GameConfig.IP; }
+        if (url === void 0) { url = GameConfig.IP; }
         var ipstr = window['getIP'];
         console.log('ipstr======', ipstr);
         //alert('ipstr====='+ipstr);
@@ -205,4 +173,24 @@ var GameUtil;
         GameUtil.Http.getinstance().send(param, "/weixinpay/pay", backfun, cont, url);
     }
     GameUtil.getredPack = getredPack;
+    /**
+     * 定位相对位置
+     * @param objtarget     要改变位置的对象
+     * @param objfixed      相对位置的对象
+     * @param posx          x轴位置
+     * @param posy          y轴位置
+     * @param anx
+     */
+    function relativepos(objtarget, objfixed, posx, posy, anx) {
+        if (anx === void 0) { anx = false; }
+        if (!anx) {
+            objtarget.x = objfixed.x - objfixed.width / 2 + posx;
+            objtarget.y = objfixed.y - objfixed.height / 2 + posy;
+        }
+    }
+    GameUtil.relativepos = relativepos;
+    function tarce(info) {
+        console.log('[DEBUG]:' + info);
+    }
+    GameUtil.tarce = tarce;
 })(GameUtil || (GameUtil = {}));

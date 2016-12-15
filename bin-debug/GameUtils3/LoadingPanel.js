@@ -26,6 +26,13 @@ var GameUtil;
         p.init = function () {
             //RES.getResByUrl(this.imageUrl,this.onComplete,this,RES.ResourceItem.TYPE_IMAGE);
             new GameUtil.LoadingLogopre(this.onComplete, this);
+            this.loadsound();
+        };
+        p.loadsound = function () {
+            for (var i = 0; i < SoundName.end; i++) {
+                var soundname = GameConfig.SoundName[i];
+                GameData._i().gamesound[i] = new MySound(soundname);
+            }
         };
         p.onComplete = function (event) {
             //console.log("onComplete");
