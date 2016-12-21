@@ -38,3 +38,4 @@ var AdaptGamelayer = (function (_super) {
     return AdaptGamelayer;
 }(GameUtil.BassPanel));
 egret.registerClass(AdaptGamelayer,'AdaptGamelayer');
+//# sourceMappingURL=AdaptGamelayer.js.map

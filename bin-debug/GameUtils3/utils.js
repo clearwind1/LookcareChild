@@ -25,6 +25,14 @@ var GameUtil;
         return shp;
     }
     GameUtil.createRect = createRect;
+    /**
+     * 创建一个实心的圆
+     * @param x     x轴坐标
+     * @param y     y轴坐标
+     * @param r     半径
+     * @param alpha 透明度
+     * @param color 颜色
+     */
     function createCircle(x, y, r, alpha, color) {
         if (alpha === void 0) { alpha = 1; }
         if (color === void 0) { color = 0x000000; }
@@ -77,30 +85,6 @@ var GameUtil;
     }
     GameUtil.isPhoneNum = isPhoneNum;
     /**
-     * 数字向上飘动动画（待改进，向指定地方移动）
-     * @param thisObj
-     * @param x
-     * @param y
-     * @param size
-     * @param number
-     * @param color
-     */
-    function numberUpDisp(thisObj, x, y, size, number, color) {
-        var textfiled = new egret.TextField();
-        textfiled.x = x;
-        textfiled.y = y;
-        textfiled.size = size;
-        textfiled.textAlign = "center";
-        textfiled.textColor = color;
-        textfiled.text = number;
-        thisObj.addChild(textfiled);
-        textfiled.anchorOffsetX = 0.5 * textfiled.width;
-        textfiled.anchorOffsetY = 0.5 * textfiled.height;
-        egret.Tween.get(textfiled).to({ y: y - 40 }, 700);
-        egret.Tween.get(textfiled).to({ alpha: 0 }, 700).call(function () { thisObj.removeChild(textfiled); }, thisObj);
-    }
-    GameUtil.numberUpDisp = numberUpDisp;
-    /**
      * 本地文件操作
      * @param key {string} 文件的关键字
      * @param data {string} 文件内容
@@ -143,15 +127,18 @@ var GameUtil;
         }
     }
     GameUtil.setscreenY = setscreenY;
-    function getRandom() {
-        var rd = Math.floor(Math.random() * 100);
-        return rd;
-    }
-    GameUtil.getRandom = getRandom;
+    /**
+     * 向服务器发起微信红包请求
+     * @param money     金额
+     * @param openid    玩家openid
+     * @param nickname  玩家昵称
+     * @param backfun   完成回调函数
+     * @param cont      函数域
+     */
     function getredPack(money, openid, nickNm, backfun, cont, url) {
         if (url === void 0) { url = GameConfig.IP; }
         var ipstr = window['getIP'];
-        console.log('ipstr======', ipstr);
+        //console.log('ipstr======',ipstr);
         //alert('ipstr====='+ipstr);
         var ipstrspl;
         for (var i = 0; i < ipstr.split('|').length; i++) {
@@ -161,8 +148,8 @@ var GameUtil;
             }
         }
         //alert('ipstrspl======'+ipstrspl);
-        console.log('ipstrspl====', ipstrspl);
-        console.log("money======", money);
+        //console.log('ipstrspl====',ipstrspl);
+        //console.log("money======", money);
         var param = {
             openId: openid,
             amount: money,
@@ -189,8 +176,14 @@ var GameUtil;
         }
     }
     GameUtil.relativepos = relativepos;
-    function tarce(info) {
-        console.log('[DEBUG]:' + info);
+    function trace() {
+        var optionalParams = [];
+        for (var _a = 0; _a < arguments.length; _a++) {
+            optionalParams[_a - 0] = arguments[_a];
+        }
+        optionalParams[0] = "[DebugLog]" + optionalParams[0];
+        console.log.apply(console, optionalParams);
     }
-    GameUtil.tarce = tarce;
+    GameUtil.trace = trace;
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=utils.js.map

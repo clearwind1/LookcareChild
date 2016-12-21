@@ -23,8 +23,14 @@ module GameUtil
         shp.graphics.endFill();
         return shp;
     }
-
-
+    /**
+     * 创建一个实心的圆
+     * @param x     x轴坐标
+     * @param y     y轴坐标
+     * @param r     半径
+     * @param alpha 透明度
+     * @param color 颜色
+     */
     export function createCircle(x:number,y:number,r:number,alpha:number=1,color:number=0x000000):egret.Shape
     {
         var shp:egret.Shape = new egret.Shape();
@@ -82,34 +88,6 @@ module GameUtil
     }
 
     /**
-     * 数字向上飘动动画（待改进，向指定地方移动）
-     * @param thisObj
-     * @param x
-     * @param y
-     * @param size
-     * @param number
-     * @param color
-     */
-    export function numberUpDisp(thisObj:any,x:number,y:number,size:number,number:string,color:number)
-    {
-        var textfiled:egret.TextField = new egret.TextField();
-        textfiled.x = x;
-        textfiled.y = y;
-        textfiled.size = size;
-        textfiled.textAlign = "center";
-        textfiled.textColor = color;
-        textfiled.text = number;
-
-        thisObj.addChild(textfiled);
-
-        textfiled.anchorOffsetX = 0.5*textfiled.width;
-        textfiled.anchorOffsetY = 0.5*textfiled.height;
-
-        egret.Tween.get(textfiled).to({y:y-40},700);
-        egret.Tween.get(textfiled).to({alpha:0},700).call(function(){thisObj.removeChild(textfiled);},thisObj);
-    }
-
-    /**
      * 本地文件操作
      * @param key {string} 文件的关键字
      * @param data {string} 文件内容
@@ -150,20 +128,19 @@ module GameUtil
             return y;
         }
     }
-
-    export function getRandom(): number
-    {
-        var rd: number = Math.floor(Math.random()*100);
-        return rd;
-    }
-
+    /**
+     * 向服务器发起微信红包请求
+     * @param money     金额
+     * @param openid    玩家openid
+     * @param nickname  玩家昵称
+     * @param backfun   完成回调函数
+     * @param cont      函数域
+     */
     export function getredPack(money:number,openid:any,nickNm:string,backfun:Function,cont:any,url:string=GameConfig.IP)
     {
         var ipstr:string = window['getIP'];
-
-        console.log('ipstr======',ipstr);
+        //console.log('ipstr======',ipstr);
         //alert('ipstr====='+ipstr);
-
         var ipstrspl: string;
         for(var i: number=0;i < ipstr.split('|').length;i++)
         {
@@ -173,12 +150,9 @@ module GameUtil
                 break;
             }
         }
-
         //alert('ipstrspl======'+ipstrspl);
-        console.log('ipstrspl====',ipstrspl);
-
-        console.log("money======", money);
-
+        //console.log('ipstrspl====',ipstrspl);
+        //console.log("money======", money);
         var param:Object = {
             openId: openid,
             amount: money,
@@ -206,9 +180,9 @@ module GameUtil
         }
     }
 
-    export function tarce(info:any)
-    {
-        console.log('[DEBUG]:'+info);
+    export function trace(...optionalParams: any[]): void {
+        optionalParams[0] = "[DebugLog]" + optionalParams[0];
+        console.log.apply(console, optionalParams);
     }
 
 }

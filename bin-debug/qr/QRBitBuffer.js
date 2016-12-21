@@ -29,3 +29,4 @@ var qr;
     qr.QRBitBuffer = QRBitBuffer;
     egret.registerClass(QRBitBuffer,'qr.QRBitBuffer');
 })(qr || (qr = {}));
+//# sourceMappingURL=QRBitBuffer.js.map

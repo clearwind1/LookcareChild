@@ -51,3 +51,4 @@ var GameUtil;
     GameUtil.RadioButton = RadioButton;
     egret.registerClass(RadioButton,'GameUtil.RadioButton');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=RadioButton.js.map

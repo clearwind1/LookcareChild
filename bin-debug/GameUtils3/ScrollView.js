@@ -45,3 +45,4 @@ var GameUtil;
     GameUtil.ScrollView = ScrollView;
     egret.registerClass(ScrollView,'GameUtil.ScrollView');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=ScrollView.js.map

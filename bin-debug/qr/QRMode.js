@@ -16,3 +16,4 @@ var qr;
     qr.QRMode = QRMode;
     egret.registerClass(QRMode,'qr.QRMode');
 })(qr || (qr = {}));
+//# sourceMappingURL=QRMode.js.map

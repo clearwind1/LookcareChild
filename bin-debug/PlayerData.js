@@ -1,4 +1,5 @@
 /**
+ * 玩家信息
  * Created by pior on 16/12/15.
  */
 var PlayerData = (function () {
@@ -19,3 +20,4 @@ var PlayerData = (function () {
     return PlayerData;
 }());
 egret.registerClass(PlayerData,'PlayerData');
+//# sourceMappingURL=PlayerData.js.map

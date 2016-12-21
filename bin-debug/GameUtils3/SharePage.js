@@ -122,3 +122,4 @@ var SharePage = (function (_super) {
     return SharePage;
 }(egret.DisplayObjectContainer));
 egret.registerClass(SharePage,'SharePage');
+//# sourceMappingURL=SharePage.js.map

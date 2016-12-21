@@ -31,3 +31,4 @@ var GameUtil;
     GameUtil.WaitServerPanel = WaitServerPanel;
     egret.registerClass(WaitServerPanel,'GameUtil.WaitServerPanel');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=WaitServerPanel.js.map

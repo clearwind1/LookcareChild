@@ -91,3 +91,4 @@ var GameUtil;
     GameUtil.GameScene = GameScene;
     egret.registerClass(GameScene,'GameUtil.GameScene');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=BassPanel.js.map

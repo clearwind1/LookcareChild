@@ -41,3 +41,4 @@ var qr;
     qr.QRMath = QRMath;
     egret.registerClass(QRMath,'qr.QRMath');
 })(qr || (qr = {}));
+//# sourceMappingURL=QRMath.js.map

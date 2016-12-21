@@ -11,7 +11,7 @@ module GameUtil
     export class LoadingPanel extends GameUtil.BassPanel
     {
         private loadingView:LoadingUI;
-        private loadingbar: GameUtil.MyBitmap;
+        private loadingbar: MyBitmap;
         private loadedfun: Function;
         private thisObj: any;
         private IsGif: boolean;
@@ -41,10 +41,12 @@ module GameUtil
         }
         private loadsound()
         {
-            for(var i:number=0;i < SoundName.end;i++)
+            for(var i:number=0;i < GameConfig.SoundName.length;i++)
             {
-                var soundname = GameConfig.SoundName[i];
+                var soundname: string = GameConfig.SoundName[i];
                 GameData._i().gamesound[i] = new MySound(soundname);
+                var soundtype: string = soundname.indexOf('bgm') > 0 ? egret.Sound.MUSIC : egret.Sound.EFFECT;
+                GameData._i().gamesound[i].soundtype = soundtype;
             }
         }
 
@@ -54,13 +56,13 @@ module GameUtil
 
             if(this.IsGif){
                 this.gifruncount = 0;
-                this.loadingbar = new GameUtil.MyBitmap(RES.getRes("loadinggif0_png"),this.mStageW/2 + this.loadingbarOffX,this.mStageH/2 + this.loadingbarOffY);
+                this.loadingbar = new MyBitmap(RES.getRes("loadinggif0_png"),this.mStageW/2 + this.loadingbarOffX,this.mStageH/2 + this.loadingbarOffY);
                 this.addChild(this.loadingbar);
                 egret.setInterval(this.rungif,this,150);
             }
             else
             {
-                this.loadingbar = new GameUtil.MyBitmap(RES.getRes("loadingbar_png"),this.loadingbarOffX,this.mStageH/2 + this.loadingbarOffY);
+                this.loadingbar = new MyBitmap(RES.getRes("loadingbar_png"),this.loadingbarOffX,this.mStageH/2 + this.loadingbarOffY);
                 this.loadingbar.x = (this.mStageW-this.loadingbar.texture.textureWidth)/2;
                 this.loadingbar.anchorOffsetX = 0;
                 var w:number = this.loadingbar.texture.textureWidth-8;

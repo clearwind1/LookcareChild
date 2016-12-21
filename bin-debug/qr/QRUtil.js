@@ -187,3 +187,4 @@ var qr;
     qr.QRUtil = QRUtil;
     egret.registerClass(QRUtil,'qr.QRUtil');
 })(qr || (qr = {}));
+//# sourceMappingURL=QRUtil.js.map

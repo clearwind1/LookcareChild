@@ -34,6 +34,7 @@ var Main = (function (_super) {
     }
     var d = __define,c=Main,p=c.prototype;
     p.onAddToStage = function (event) {
+        /**获取玩家openid 与 分享者shareopenid */
         PlayerData._i().UserInfo.openid = GameUtil.getQueryString('openid');
         PlayerData._i().UserInfo.shareopenid = GameUtil.getQueryString('shareopenid');
         if (!GameConfig.DEBUG) {
@@ -52,6 +53,7 @@ var Main = (function (_super) {
                 else {
                     PlayerData._i().UserInfo.shareopenid = GameUtil.getQueryString('shareopenid');
                 }
+                /**配置游戏基本信息 */
                 this.stage.scaleMode = egret.StageScaleMode.FIXED_NARROW;
                 this.stage.setContentSize(GameConfig.DesignWidth, GameConfig.DesignHeight);
                 GameUtil.GameScene.init(this.stage);
@@ -72,8 +74,10 @@ var Main = (function (_super) {
     p.createGameScene = function () {
         GameUtil.Http.getinstance();
         GameConfig._i().setStageHeight(this.stage.stageHeight);
+        GameConfig._i().setStageWidth(this.stage.stageWidth);
         GameUtil.GameScene.runscene(new StartGameScene());
     };
     return Main;
 }(egret.DisplayObjectContainer));
 egret.registerClass(Main,'Main');
+//# sourceMappingURL=Main.js.map

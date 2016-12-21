@@ -20,3 +20,4 @@ var qr;
     qr.QRMaskPattern = QRMaskPattern;
     egret.registerClass(QRMaskPattern,'qr.QRMaskPattern');
 })(qr || (qr = {}));
+//# sourceMappingURL=QRMaskPattern.js.map

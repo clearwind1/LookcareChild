@@ -9,7 +9,7 @@ module GameUtil
     {
         private textsize:number = 30;
         private tipText:string;
-        private tipbg:GameUtil.MyBitmap;
+        private tipbg:MyBitmap;
         private text:GameUtil.MyTextField;
         private tipImg:string;
         private bDisappear:boolean;
@@ -51,7 +51,7 @@ module GameUtil
             }
             else
             {
-                this.tipbg = new GameUtil.MyBitmap(RES.getRes(this.tipImg),this.mStageW/2,this.mStageH/2);
+                this.tipbg = new MyBitmap(RES.getRes(this.tipImg),this.mStageW/2,this.mStageH/2);
                 this.addChild(this.tipbg);
             }
 

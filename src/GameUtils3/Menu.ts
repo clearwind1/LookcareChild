@@ -2,20 +2,19 @@
  * 菜单，按钮类
  * Created by pior on 15/9/28.
  */
-module GameUtil
-{
+module GameUtil {
     /*
      *创建按钮
      */
-    export class Menu extends egret.DisplayObjectContainer
-    {
-        private menuNormalTexture:egret.Texture = null;
-        private menuSelectTexture:egret.Texture = null;
+    export class Menu extends egret.DisplayObjectContainer {
+        private menuNormalTexture: egret.Texture = null;
+        private menuSelectTexture: egret.Texture = null;
         private backFun: Function;
-        private param:any[];//回调参数
+        private param: any[];//回调参数
         private thisObj;
-        private btnImg: GameUtil.MyBitmap;
-        private addImg: GameUtil.MyBitmap;
+        private btnImg: MyBitmap;
+        private addImg: MyBitmap;
+        private btnsound: MySound;
 
         private bScaleMode: boolean = false;
         private mScale: number = 0.9;
@@ -32,40 +31,42 @@ module GameUtil
          * @param backFun {Function} 按钮绑定的事件函数
          * @param param {any[]} 按钮绑定的事件函数的参数
          */
-        public constructor(context: any, normal: string, select: string, backFun: Function = null,param:any[] = null)
-        {
+        public constructor(context: any, normal: string, select: string, backFun: Function = null, param: any[] = null) {
             super();
             this.thisObj = context;
             this.param = param;
-            this.init(normal,select,backFun);
+            this.init(normal, select, backFun);
         }
 
-        private init(normal: string, select: string, backFun: Function = null)
-        {
+        private init(normal: string, select: string, backFun: Function = null) {
+            this.btnsound = null;
             this.menuNormalTexture = RES.getRes(normal);
             this.menuSelectTexture = RES.getRes(select);
             this.backFun = backFun;
-            this.btnImg = new GameUtil.MyBitmap(this.menuNormalTexture,0,0);
+            this.btnImg = new MyBitmap(this.menuNormalTexture, 0, 0);
             this.addChild(this.btnImg);
 
             this.touchEnabled = true;
-            this.addEventListener(egret.TouchEvent.TOUCH_BEGIN,this.TouchBegin,this);
-            this.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.TouchMove,this);
-            this.addEventListener(egret.TouchEvent.TOUCH_END,this.TouchEnd,this);
-            this.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,this.TouchCancel,this);
+            this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.TouchBegin, this);
+            this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.TouchMove, this);
+            this.addEventListener(egret.TouchEvent.TOUCH_END, this.TouchEnd, this);
+            this.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.TouchCancel, this);
         }
 
-        public setBackFun(backFun: Function):void
-        {
+        public setBackFun(backFun: Function): void {
             this.backFun = backFun;
+        }
+
+        /**设置按钮音效 */
+        public setBtnSound(btnsound: MySound) {
+            this.btnsound = btnsound;
         }
 
         /**
          * 设置按钮的缩放模式，按钮状态只做缩放时可使用
          * @param scale {number} 缩放大小
          */
-        public setScaleMode(scale:number = 0.9):void
-        {
+        public setScaleMode(scale: number = 0.9): void {
             this.bScaleMode = true;
             this.mScale = scale;
         }
@@ -75,85 +76,75 @@ module GameUtil
          * @param normal
          * @param select
          */
-        public setButtonTexture(normal: string, select: string):void
-        {
+        public setButtonTexture(normal: string, select: string): void {
             this.menuNormalTexture = RES.getRes(normal);
             this.menuSelectTexture = RES.getRes(select);
             this.btnImg.setNewTexture(this.menuNormalTexture);
         }
 
-        public addButtonImg(img:string,offx:number=0,offy:number=0):void
-        {
-            this.addImg = new GameUtil.MyBitmap(RES.getRes(img),offx,offy);
+        public addButtonImg(img: string, offx: number = 0, offy: number = 0): void {
+            this.addImg = new MyBitmap(RES.getRes(img), offx, offy);
             this.addChild(this.addImg);
         }
-        public setAddImgTexture(img:string)
-        {
+        public setAddImgTexture(img: string) {
             this.addImg.setNewTexture(RES.getRes(img));
         }
 
-        public addButtonText(text:string,size:number,offx:number=0,offy:number=0):void
-        {
-            if(this.btnImg.texture != null){
+        public addButtonText(text: string, size: number, offx: number = 0, offy: number = 0): void {
+            if (this.btnImg.texture != null) {
                 //console.log("fdsafdsafdsa=====",this.btnImg.texture.$getTextureWidth()/2);
-                this.mTextField = new GameUtil.MyTextField(offx,offy,size);//createTextField(this.btnImg.texture.$getTextureWidth()/2+offx,this.btnImg.texture.$getTextureHeight()/2+offy,20);
+                this.mTextField = new GameUtil.MyTextField(offx, offy, size);//createTextField(this.btnImg.texture.$getTextureWidth()/2+offx,this.btnImg.texture.$getTextureHeight()/2+offy,20);
             }
-            else
-            {
-                this.mTextField = new GameUtil.MyTextField(offx,offy,size);
+            else {
+                this.mTextField = new GameUtil.MyTextField(offx, offy, size);
             }
 
             this.mTextField.setText(text);
             this.addChild(this.mTextField);
         }
-        public getBtnText():GameUtil.MyTextField
-        {
+        public getBtnText(): GameUtil.MyTextField {
             return this.mTextField;
         }
 
-        public setBtnScale(scaleX:number,scaleY:number):void
-        {
+        public setBtnScale(scaleX: number, scaleY: number): void {
             this.btnImg.scaleX = scaleX;
             this.btnImg.scaleY = scaleY;
         }
 
-        private TouchBegin(event:egret.TouchEvent):void
-        {
+        private TouchBegin(event: egret.TouchEvent): void {
             //console.log("touchbegin");
+            if (this.btnsound) {
+                this.btnsound.play();
+            }
+
             this.btnImg.setNewTexture(this.menuSelectTexture);
-            if(this.bScaleMode)
-            {
+            if (this.bScaleMode) {
                 this.scaleX = this.scaleY = this.mScale;
             }
 
             this.isActive = true;
         }
-        private TouchMove(event:egret.TouchEvent):void
-        {
+        private TouchMove(event: egret.TouchEvent): void {
             //console.log("touchmove");
         }
-        private TouchEnd(event:egret.TouchEvent):void
-        {
+        private TouchEnd(event: egret.TouchEvent): void {
             //console.log("touchend");
             this.btnImg.setNewTexture(this.menuNormalTexture);
-            if(this.bScaleMode)
-            {
+            if (this.bScaleMode) {
                 this.scaleX = this.scaleY = 1;
             }
 
-            if(this.isActive){
-                this.backFun.apply(this.thisObj,this.param);
+            if (this.isActive) {
+                this.backFun.apply(this.thisObj, this.param);
             }
 
             this.isActive = false;
 
         }
-        private TouchCancel(event:egret.TouchEvent):void
-        {
+        private TouchCancel(event: egret.TouchEvent): void {
             //console.log("touchcancel");
             this.btnImg.setNewTexture(this.menuNormalTexture);
-            if(this.bScaleMode)
-            {
+            if (this.bScaleMode) {
                 this.scaleX = this.scaleY = 1;
             }
             this.isActive = false;

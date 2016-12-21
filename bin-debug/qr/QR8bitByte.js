@@ -50,3 +50,4 @@ var qr;
     qr.QR8bitByte = QR8bitByte;
     egret.registerClass(QR8bitByte,'qr.QR8bitByte');
 })(qr || (qr = {}));
+//# sourceMappingURL=QR8bitByte.js.map

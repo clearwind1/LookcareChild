@@ -39,3 +39,4 @@ var GameUtil;
     GameUtil.MyTextField = MyTextField;
     egret.registerClass(MyTextField,'GameUtil.MyTextField');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=MyTextField.js.map

@@ -67,3 +67,4 @@ var GameUtil;
     GameUtil.LoadingLogopre = LoadingLogopre;
     egret.registerClass(LoadingLogopre,'GameUtil.LoadingLogopre');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=LoadingLogopre.js.map

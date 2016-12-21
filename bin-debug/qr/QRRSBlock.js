@@ -41,3 +41,4 @@ var qr;
     qr.QRRSBlock = QRRSBlock;
     egret.registerClass(QRRSBlock,'qr.QRRSBlock');
 })(qr || (qr = {}));
+//# sourceMappingURL=QRRSBlock.js.map

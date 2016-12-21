@@ -29,57 +29,45 @@
 
 class Main extends egret.DisplayObjectContainer {
 
-    /**
-     * 加载进度界面
-     * Process interface loading
-     */
-    private loadingView:LoadingUI;
-
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
 
-    private onAddToStage(event:egret.Event) {
+    private onAddToStage(event: egret.Event) {
+        /**获取玩家openid 与 分享者shareopenid */
         PlayerData._i().UserInfo.openid = GameUtil.getQueryString('openid');
         PlayerData._i().UserInfo.shareopenid = GameUtil.getQueryString('shareopenid');
 
-        if(!GameConfig.DEBUG)
-        {
-            if(!GameUtil.getQueryString('openid')){
-                if(GameUtil.getQueryString('shareopenid'))
-                {
-                    window.location.href = 'http://api.h5.gamexun.com/weixin/auth?game_redirecturl=http://bubblefightv02.h5.gamexun.com/&shareopenid='+GameUtil.getQueryString('shareopenid');
+        if (!GameConfig.DEBUG) {
+            if (!GameUtil.getQueryString('openid')) {
+                if (GameUtil.getQueryString('shareopenid')) {
+                    window.location.href = 'http://api.h5.gamexun.com/weixin/auth?game_redirecturl=http://bubblefightv02.h5.gamexun.com/&shareopenid=' + GameUtil.getQueryString('shareopenid');
                 }
-                else
-                {
+                else {
                     window.location.href = 'http://api.h5.gamexun.com/weixin/auth?game_redirecturl=http://bubblefightv02.h5.gamexun.com/';
                 }
             }
-            else
-            {
+            else {
 
-                if(!GameUtil.getQueryString('shareopenid'))
-                {
+                if (!GameUtil.getQueryString('shareopenid')) {
                     PlayerData._i().UserInfo.shareopenid = null;
                 }
-                else
-                {
+                else {
                     PlayerData._i().UserInfo.shareopenid = GameUtil.getQueryString('shareopenid');
                 }
-
+                /**配置游戏基本信息 */
                 this.stage.scaleMode = egret.StageScaleMode.FIXED_NARROW;
-                this.stage.setContentSize(GameConfig.DesignWidth,GameConfig.DesignHeight);
+                this.stage.setContentSize(GameConfig.DesignWidth, GameConfig.DesignHeight);
                 GameUtil.GameScene.init(this.stage);
-                GameUtil.GameScene.runscene(new GameUtil.LoadingPanel(this.createGameScene,this,0,0));
+                GameUtil.GameScene.runscene(new GameUtil.LoadingPanel(this.createGameScene, this, 0, 0));
             }
         }
-        else
-        {
+        else {
             this.stage.scaleMode = egret.StageScaleMode.FIXED_NARROW;
-            this.stage.setContentSize(GameConfig.DesignWidth,GameConfig.DesignHeight);
+            this.stage.setContentSize(GameConfig.DesignWidth, GameConfig.DesignHeight);
             GameUtil.GameScene.init(this.stage);
-            GameUtil.GameScene.runscene(new GameUtil.LoadingPanel(this.createGameScene,this,0,0));
+            GameUtil.GameScene.runscene(new GameUtil.LoadingPanel(this.createGameScene, this, 0, 0));
         }
 
     }
@@ -88,11 +76,12 @@ class Main extends egret.DisplayObjectContainer {
      * 创建游戏场景
      * Create a game scene
      */
-    private createGameScene():void {
+    private createGameScene(): void {
 
         GameUtil.Http.getinstance();
 
         GameConfig._i().setStageHeight(this.stage.stageHeight);
+        GameConfig._i().setStageWidth(this.stage.stageWidth);
         GameUtil.GameScene.runscene(new StartGameScene());
 
     }

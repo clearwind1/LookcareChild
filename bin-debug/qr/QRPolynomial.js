@@ -43,3 +43,4 @@ var qr;
     qr.QRPolynomial = QRPolynomial;
     egret.registerClass(QRPolynomial,'qr.QRPolynomial');
 })(qr || (qr = {}));
+//# sourceMappingURL=QRPolynomial.js.map

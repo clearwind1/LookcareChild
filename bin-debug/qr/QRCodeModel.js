@@ -207,3 +207,4 @@ var qr;
     qr.QRCodeModel = QRCodeModel;
     egret.registerClass(QRCodeModel,'qr.QRCodeModel');
 })(qr || (qr = {}));
+//# sourceMappingURL=QRCodeModel.js.map

@@ -40,7 +40,7 @@ var GameUtil;
                 this.addChild(tipbgcover);
             }
             else {
-                this.tipbg = new GameUtil.MyBitmap(RES.getRes(this.tipImg), this.mStageW / 2, this.mStageH / 2);
+                this.tipbg = new MyBitmap(RES.getRes(this.tipImg), this.mStageW / 2, this.mStageH / 2);
                 this.addChild(this.tipbg);
             }
             this.showtip();
@@ -100,3 +100,4 @@ var GameUtil;
     GameUtil.TipsPanel = TipsPanel;
     egret.registerClass(TipsPanel,'GameUtil.TipsPanel');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=TipsPanel.js.map

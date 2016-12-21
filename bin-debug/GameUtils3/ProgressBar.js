@@ -24,7 +24,7 @@ var GameUtil;
         }
         var d = __define,c=ProgressBar,p=c.prototype;
         p.init = function (imagename, x, y, rect, anchorX, anchorY) {
-            this.progressbar = new GameUtil.MyBitmap(RES.getRes(imagename), x, y);
+            this.progressbar = new MyBitmap(RES.getRes(imagename), x, y);
             this.addChild(this.progressbar);
             this.progressbar.scale9Grid = rect;
             this.progressbar.setanchorOff(anchorX, anchorY);
@@ -67,3 +67,4 @@ var GameUtil;
     GameUtil.ProgressBar = ProgressBar;
     egret.registerClass(ProgressBar,'GameUtil.ProgressBar');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=ProgressBar.js.map

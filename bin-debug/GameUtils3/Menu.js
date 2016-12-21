@@ -33,10 +33,11 @@ var GameUtil;
         var d = __define,c=Menu,p=c.prototype;
         p.init = function (normal, select, backFun) {
             if (backFun === void 0) { backFun = null; }
+            this.btnsound = null;
             this.menuNormalTexture = RES.getRes(normal);
             this.menuSelectTexture = RES.getRes(select);
             this.backFun = backFun;
-            this.btnImg = new GameUtil.MyBitmap(this.menuNormalTexture, 0, 0);
+            this.btnImg = new MyBitmap(this.menuNormalTexture, 0, 0);
             this.addChild(this.btnImg);
             this.touchEnabled = true;
             this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.TouchBegin, this);
@@ -46,6 +47,10 @@ var GameUtil;
         };
         p.setBackFun = function (backFun) {
             this.backFun = backFun;
+        };
+        /**设置按钮音效 */
+        p.setBtnSound = function (btnsound) {
+            this.btnsound = btnsound;
         };
         /**
          * 设置按钮的缩放模式，按钮状态只做缩放时可使用
@@ -69,7 +74,7 @@ var GameUtil;
         p.addButtonImg = function (img, offx, offy) {
             if (offx === void 0) { offx = 0; }
             if (offy === void 0) { offy = 0; }
-            this.addImg = new GameUtil.MyBitmap(RES.getRes(img), offx, offy);
+            this.addImg = new MyBitmap(RES.getRes(img), offx, offy);
             this.addChild(this.addImg);
         };
         p.setAddImgTexture = function (img) {
@@ -97,6 +102,9 @@ var GameUtil;
         };
         p.TouchBegin = function (event) {
             //console.log("touchbegin");
+            if (this.btnsound) {
+                this.btnsound.play();
+            }
             this.btnImg.setNewTexture(this.menuSelectTexture);
             if (this.bScaleMode) {
                 this.scaleX = this.scaleY = this.mScale;
@@ -130,3 +138,4 @@ var GameUtil;
     GameUtil.Menu = Menu;
     egret.registerClass(Menu,'GameUtil.Menu');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=Menu.js.map

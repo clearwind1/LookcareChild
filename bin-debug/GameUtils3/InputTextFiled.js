@@ -56,3 +56,4 @@ var GameUtil;
     GameUtil.InputTextFiled = InputTextFiled;
     egret.registerClass(InputTextFiled,'GameUtil.InputTextFiled');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=InputTextFiled.js.map

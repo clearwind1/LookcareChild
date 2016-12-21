@@ -16,3 +16,4 @@ var qr;
     qr.QRErrorCorrectLevel = QRErrorCorrectLevel;
     egret.registerClass(QRErrorCorrectLevel,'qr.QRErrorCorrectLevel');
 })(qr || (qr = {}));
+//# sourceMappingURL=QRErrorCorrectLevel.js.map

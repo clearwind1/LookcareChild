@@ -51,3 +51,4 @@ var qr;
     qr.QRCode = QRCode;
     egret.registerClass(QRCode,'qr.QRCode');
 })(qr || (qr = {}));
+//# sourceMappingURL=QRCode.js.map

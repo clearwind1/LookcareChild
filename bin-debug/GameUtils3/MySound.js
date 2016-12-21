@@ -21,7 +21,7 @@ var MySound = (function () {
     p.play = function (startTime, loops) {
         if (startTime === void 0) { startTime = 0; }
         if (loops === void 0) { loops = 1; }
-        if (!GameConfig._i().bgamesound) {
+        if (this.soundtype == egret.Sound.EFFECT && !GameConfig._i().bgamesound) {
             return;
         }
         var tsound = this.sound;
@@ -41,3 +41,4 @@ var MySound = (function () {
     return MySound;
 }());
 egret.registerClass(MySound,'MySound');
+//# sourceMappingURL=MySound.js.map

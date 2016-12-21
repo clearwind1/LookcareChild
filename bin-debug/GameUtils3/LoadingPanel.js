@@ -29,21 +29,23 @@ var GameUtil;
             this.loadsound();
         };
         p.loadsound = function () {
-            for (var i = 0; i < SoundName.end; i++) {
+            for (var i = 0; i < GameConfig.SoundName.length; i++) {
                 var soundname = GameConfig.SoundName[i];
                 GameData._i().gamesound[i] = new MySound(soundname);
+                var soundtype = soundname.indexOf('bgm') > 0 ? egret.Sound.MUSIC : egret.Sound.EFFECT;
+                GameData._i().gamesound[i].soundtype = soundtype;
             }
         };
         p.onComplete = function (event) {
             //console.log("onComplete");
             if (this.IsGif) {
                 this.gifruncount = 0;
-                this.loadingbar = new GameUtil.MyBitmap(RES.getRes("loadinggif0_png"), this.mStageW / 2 + this.loadingbarOffX, this.mStageH / 2 + this.loadingbarOffY);
+                this.loadingbar = new MyBitmap(RES.getRes("loadinggif0_png"), this.mStageW / 2 + this.loadingbarOffX, this.mStageH / 2 + this.loadingbarOffY);
                 this.addChild(this.loadingbar);
                 egret.setInterval(this.rungif, this, 150);
             }
             else {
-                this.loadingbar = new GameUtil.MyBitmap(RES.getRes("loadingbar_png"), this.loadingbarOffX, this.mStageH / 2 + this.loadingbarOffY);
+                this.loadingbar = new MyBitmap(RES.getRes("loadingbar_png"), this.loadingbarOffX, this.mStageH / 2 + this.loadingbarOffY);
                 this.loadingbar.x = (this.mStageW - this.loadingbar.texture.textureWidth) / 2;
                 this.loadingbar.anchorOffsetX = 0;
                 var w = this.loadingbar.texture.textureWidth - 8;
@@ -135,3 +137,4 @@ var GameUtil;
     GameUtil.LoadingPanel = LoadingPanel;
     egret.registerClass(LoadingPanel,'GameUtil.LoadingPanel');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=LoadingPanel.js.map

@@ -36,3 +36,4 @@ var GameUtil;
     GameUtil.GetResByany = GetResByany;
     egret.registerClass(GetResByany,'GameUtil.GetResByany');
 })(GameUtil || (GameUtil = {}));
+//# sourceMappingURL=GetResByany.js.map

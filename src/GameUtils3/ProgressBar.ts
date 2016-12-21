@@ -8,7 +8,7 @@ module GameUtil
     export class ProgressBar extends egret.DisplayObjectContainer
     {
 
-        private progressbar: GameUtil.MyBitmap;
+        private progressbar: MyBitmap;
         private mPercent: number = 100;
 
         /**
@@ -28,7 +28,7 @@ module GameUtil
 
         private init(imagename:string,x:number,y:number,rect:egret.Rectangle,anchorX:number,anchorY:number):void
         {
-            this.progressbar = new GameUtil.MyBitmap(RES.getRes(imagename),x,y);
+            this.progressbar = new MyBitmap(RES.getRes(imagename),x,y);
             this.addChild(this.progressbar);
             this.progressbar.scale9Grid = rect;
             this.progressbar.setanchorOff(anchorX,anchorY);
