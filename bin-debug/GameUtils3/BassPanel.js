@@ -6,17 +6,22 @@ var GameUtil;
 (function (GameUtil) {
     var BassPanel = (function (_super) {
         __extends(BassPanel, _super);
-        function BassPanel() {
+        function BassPanel(params) {
             _super.call(this);
             this.mStageW = egret.MainContext.instance.stage.stageWidth;
             this.mStageH = egret.MainContext.instance.stage.stageHeight;
+            if (params)
+                this.params = params;
             this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         }
         var d = __define,c=BassPanel,p=c.prototype;
         p.onAddToStage = function (event) {
-            this.init();
+            if (this.params)
+                this.init(this.params);
+            else
+                this.init();
         };
-        p.init = function () {
+        p.init = function (params) {
         };
         return BassPanel;
     }(egret.DisplayObjectContainer));
@@ -43,7 +48,7 @@ var GameUtil;
          * @param duration {number} 切换场景的时间
          */
         GameScene.runscene = function (scene, transtype, duration) {
-            if (transtype === void 0) { transtype = GameConfig.NullAction; }
+            if (transtype === void 0) { transtype = SceneEffect.NullAction; }
             if (duration === void 0) { duration = 800; }
             if (this.curScene == null) {
                 //console.log("curscenenull");
@@ -51,7 +56,7 @@ var GameUtil;
                 this.MainStage.addChild(this.curScene);
                 return;
             }
-            if (transtype == GameConfig.NullAction) {
+            if (transtype == SceneEffect.NullAction) {
                 //console.log("curscenenullaction");
                 if (this.curScene != null) {
                     this.MainStage.removeChild(this.curScene);
@@ -64,17 +69,17 @@ var GameUtil;
                 this.nextScene = scene;
                 this.MainStage.addChild(this.nextScene);
                 //场景动画
-                if (transtype == GameConfig.TransAlpha) {
+                if (transtype == SceneEffect.TransAlpha) {
                     this.nextScene.alpha = 0;
                     egret.Tween.get(this.curScene).to({ alpha: 0 }, duration);
                     egret.Tween.get(this.nextScene).to({ alpha: 1 }, duration);
                 }
-                if (transtype == GameConfig.CrossLeft) {
+                if (transtype == SceneEffect.CrossLeft) {
                     this.nextScene.x = -this.MainStage.stageWidth;
                     egret.Tween.get(this.curScene).to({ x: this.MainStage.stageWidth }, duration);
                     egret.Tween.get(this.nextScene).to({ x: 0 }, duration);
                 }
-                if (transtype == GameConfig.OpenDoor) {
+                if (transtype == SceneEffect.OpenDoor) {
                 }
                 var local = this;
                 egret.setTimeout(function () {

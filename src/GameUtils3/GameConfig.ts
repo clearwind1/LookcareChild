@@ -5,8 +5,11 @@
 
 /**声音文件枚举 */
 enum SoundName { startgamebgm, gamebgm, end };
+/**场景转换效果，对应：无效果，从左往右，淡入淡出，向两边分开 */
+enum SceneEffect { NullAction, CrossLeft, TransAlpha, OpenDoor };
 
 class GameConfig {
+    /**基本配置 */
     public static DEBUG: boolean = true;
     public static IP: string = "api.h5.gamexun.com";        //http连接地址
     public static GAMENAME: string = 'bubblefightv02';      //游戏在服务器上的名字
@@ -16,12 +19,6 @@ class GameConfig {
     public static GAMEMUSIC: string = 'gamemusic';          //游戏音乐
     public static SoundName: string[] = [];                 //声音文件名
     public static GUIDESTEPNUM: number = 2;                 //新手引导总步数
-
-    //场景转换
-    public static NullAction: number = 0;            //无动画
-    public static CrossLeft: number = 1;             //从左往右
-    public static TransAlpha: number = 2;            //淡入淡出
-    public static OpenDoor: number = 3;              //开门方式
 
     public static DesignWidth: number = 750;         //游戏设计尺寸宽
     public static DesignHeight: number = 1334;       //游戏设计尺寸高
@@ -33,6 +30,11 @@ class GameConfig {
     public bgamesound: boolean;                     //是否开启游戏音效
     public bgamemusic: boolean;                     //是否开启游戏音乐
     public bguidedone: boolean;                     //是否完成新手引导
+    /**基本配置结束 */
+
+    /**开发游戏配置 */
+    public static PLAYERLIFE: number = 10;
+    /**开发游戏配置结束 */
 
     public constructor() {
         this.initconfigdata();
@@ -51,19 +53,13 @@ class GameConfig {
         this.bgamesound = parseInt(GameUtil.readLocalData(GameConfig.GAMESOUND)) == 1 ? true : false;
 
     }
-    /**配置视窗高 */
-    public setStageHeight(stageh: number): void {
-        this.stageH = stageh;
+    /**获取视窗高 */
+    public static getSH(): number {
+        return egret.MainContext.instance.stage.stageHeight;
     }
-    public getSH(): number {
-        return this.stageH;
-    }
-    /**配置视窗宽 */
-    public setStageWidth(stagew: number): void {
-        this.stageW = stagew;
-    }
-    public getSW(): number {
-        return this.stageW;
+    /**获取视窗宽 */
+    public static getSW(): number {
+        return egret.MainContext.instance.stage.stageWidth;
     }
 
     private static _instance: GameConfig = null;

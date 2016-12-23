@@ -6,7 +6,7 @@ class Animation extends MyBitmap {
 
     public textureName: string;
     public totalNumber: number;
-    private currentNumber: number = 1;
+    public currentNumber: number = 0;
     private countNumber: number = 0;
     private frameRate: number;
     private bLoopCount: number = 0;
@@ -83,6 +83,13 @@ class Animation extends MyBitmap {
         }
 
         this.setNewTexture(RES.getRes(this.textureName + this.currentNumber + '_png'));
+    }
+    /**切换动画 */
+    public switchani(textureName: string, totalNumber: number, loopcount: number = -1) {
+        this.textureName = textureName;
+        this.totalNumber = totalNumber;
+        this.currentNumber = 0;
+        this.bLoopCount = loopcount;
     }
 
     /**

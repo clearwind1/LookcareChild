@@ -12,7 +12,7 @@ var Animation = (function (_super) {
      */
     function Animation(textureName, totalNumber, frameRate, posx, posy) {
         _super.call(this, RES.getRes(textureName + '1' + '_png'), posx, posy);
-        this.currentNumber = 1;
+        this.currentNumber = 0;
         this.countNumber = 0;
         this.bLoopCount = 0;
         this.endcallfun = null;
@@ -67,6 +67,14 @@ var Animation = (function (_super) {
             }
         }
         this.setNewTexture(RES.getRes(this.textureName + this.currentNumber + '_png'));
+    };
+    /**切换动画 */
+    p.switchani = function (textureName, totalNumber, loopcount) {
+        if (loopcount === void 0) { loopcount = -1; }
+        this.textureName = textureName;
+        this.totalNumber = totalNumber;
+        this.currentNumber = 0;
+        this.bLoopCount = loopcount;
     };
     /**
      * 动画播放完毕后要执行的函数

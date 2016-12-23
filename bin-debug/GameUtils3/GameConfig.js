@@ -10,7 +10,17 @@ var SoundName;
     SoundName[SoundName["end"] = 2] = "end";
 })(SoundName || (SoundName = {}));
 ;
+/**场景转换效果，对应：无效果，从左往右，淡入淡出，向两边分开 */
+var SceneEffect;
+(function (SceneEffect) {
+    SceneEffect[SceneEffect["NullAction"] = 0] = "NullAction";
+    SceneEffect[SceneEffect["CrossLeft"] = 1] = "CrossLeft";
+    SceneEffect[SceneEffect["TransAlpha"] = 2] = "TransAlpha";
+    SceneEffect[SceneEffect["OpenDoor"] = 3] = "OpenDoor";
+})(SceneEffect || (SceneEffect = {}));
+;
 var GameConfig = (function () {
+    /**开发游戏配置结束 */
     function GameConfig() {
         this.stageH = 0; //视窗高
         this.stageW = 0; //视窗宽
@@ -30,19 +40,13 @@ var GameConfig = (function () {
         this.bgamemusic = parseInt(GameUtil.readLocalData(GameConfig.GAMEMUSIC)) == 1 ? true : false;
         this.bgamesound = parseInt(GameUtil.readLocalData(GameConfig.GAMESOUND)) == 1 ? true : false;
     };
-    /**配置视窗高 */
-    p.setStageHeight = function (stageh) {
-        this.stageH = stageh;
+    /**获取视窗高 */
+    GameConfig.getSH = function () {
+        return egret.MainContext.instance.stage.stageHeight;
     };
-    p.getSH = function () {
-        return this.stageH;
-    };
-    /**配置视窗宽 */
-    p.setStageWidth = function (stagew) {
-        this.stageW = stagew;
-    };
-    p.getSW = function () {
-        return this.stageW;
+    /**获取视窗宽 */
+    GameConfig.getSW = function () {
+        return egret.MainContext.instance.stage.stageWidth;
     };
     GameConfig._i = function () {
         if (this._instance == null) {
@@ -50,6 +54,7 @@ var GameConfig = (function () {
         }
         return this._instance;
     };
+    /**基本配置 */
     GameConfig.DEBUG = true;
     GameConfig.IP = "api.h5.gamexun.com"; //http连接地址
     GameConfig.GAMENAME = 'bubblefightv02'; //游戏在服务器上的名字
@@ -59,13 +64,11 @@ var GameConfig = (function () {
     GameConfig.GAMEMUSIC = 'gamemusic'; //游戏音乐
     GameConfig.SoundName = []; //声音文件名
     GameConfig.GUIDESTEPNUM = 2; //新手引导总步数
-    //场景转换
-    GameConfig.NullAction = 0; //无动画
-    GameConfig.CrossLeft = 1; //从左往右
-    GameConfig.TransAlpha = 2; //淡入淡出
-    GameConfig.OpenDoor = 3; //开门方式
     GameConfig.DesignWidth = 750; //游戏设计尺寸宽
     GameConfig.DesignHeight = 1334; //游戏设计尺寸高
+    /**基本配置结束 */
+    /**开发游戏配置 */
+    GameConfig.PLAYERLIFE = 10;
     GameConfig._instance = null;
     return GameConfig;
 }());

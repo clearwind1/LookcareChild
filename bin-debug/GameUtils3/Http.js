@@ -42,7 +42,7 @@ var GameUtil;
             this.urlRequest.data = urlVariables;
             this.urlLoader.addEventListener(egret.Event.COMPLETE, this.loaded, this);
             this.urlLoader.load(this.urlRequest);
-            this.coverBg = GameUtil.createRect(0, 0, GameConfig._i().getSW(), GameConfig._i().getSH(), 0);
+            this.coverBg = GameUtil.createRect(0, 0, GameConfig.getSW(), GameConfig.getSH(), 0);
             this.thisObj.addChild(this.coverBg);
             this.coverBg.touchEnabled = true;
             //console.log("GameUtil.WaitServerPanel.getInstace()=========",GameUtil.WaitServerPanel.getInstace());

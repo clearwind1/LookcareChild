@@ -5,7 +5,7 @@
 			"name": "preloading"
 		},
 		{
-			"keys": "startgamebtn_png,startgamebg_png,helpbtn_png,rankbtn_png,settingbtn_png,sharebtn_png,closebtn_png,rankbg_png,bow_png,help_controlimg_png,helpbg_png,helppagepoint_png,helpselect_png,spear_png,settingbg_png,settingswitch_png,settingswitchoff_png,settingswitchon_png,sharetip_png",
+			"keys": "startgamebtn_png,startgamebg_png,helpbtn_png,rankbtn_png,settingbtn_png,sharebtn_png,closebtn_png,rankbg_png,bow_png,help_controlimg_png,helpbg_png,helppagepoint_png,helpselect_png,spear_png,settingbg_png,settingswitch_png,settingswitchoff_png,settingswitchon_png,sharetip_png,gamebg_png,gameoverbg_png,gameovertext_png,normalbtn_png,lifebar_png,lifeframe_png,controlp_png,dou1_png,dou10_png,dou2_png,dou3_png,dou4_png,dou5_png,dou6_png,dou7_png,dou8_png,dou9_png,bowatt1_png,bowatt2_png,bowatt3_png,bowatt4_png,bowatt5_png,bowatt6_png,bowatt7_png,bowatt8_png,bowrun1_png,bowrun2_png,bowrun3_png,bowrun4_png,bowrun5_png,bowrun6_png,bowrun7_png,bowrun8_png,spearatt1_png,spearatt10_png,spearatt2_png,spearatt3_png,spearatt4_png,spearatt5_png,spearatt6_png,spearatt7_png,spearatt8_png,spearatt9_png,spearrun1_png,spearrun2_png,spearrun3_png,spearrun4_png,spearrun5_png,spearrun6_png,spearrun7_png,spearrun8_png",
 			"name": "preload"
 		}
 	],
@@ -114,6 +114,261 @@
 			"name": "sharetip_png",
 			"type": "image",
 			"url": "assets/sharetip.png"
+		},
+		{
+			"name": "gamebg_png",
+			"type": "image",
+			"url": "assets/gamebg.png"
+		},
+		{
+			"name": "gameoverbg_png",
+			"type": "image",
+			"url": "assets/gameoverbg.png"
+		},
+		{
+			"name": "gameovertext_png",
+			"type": "image",
+			"url": "assets/gameovertext.png"
+		},
+		{
+			"name": "normalbtn_png",
+			"type": "image",
+			"url": "assets/normalbtn.png"
+		},
+		{
+			"name": "lifebar_png",
+			"type": "image",
+			"url": "assets/lifebar.png"
+		},
+		{
+			"name": "lifeframe_png",
+			"type": "image",
+			"url": "assets/lifeframe.png"
+		},
+		{
+			"name": "controlp_png",
+			"type": "image",
+			"url": "assets/controlp.png"
+		},
+		{
+			"name": "dou1_png",
+			"type": "image",
+			"url": "assets/dou/dou1.png"
+		},
+		{
+			"name": "dou10_png",
+			"type": "image",
+			"url": "assets/dou/dou10.png"
+		},
+		{
+			"name": "dou2_png",
+			"type": "image",
+			"url": "assets/dou/dou2.png"
+		},
+		{
+			"name": "dou3_png",
+			"type": "image",
+			"url": "assets/dou/dou3.png"
+		},
+		{
+			"name": "dou4_png",
+			"type": "image",
+			"url": "assets/dou/dou4.png"
+		},
+		{
+			"name": "dou5_png",
+			"type": "image",
+			"url": "assets/dou/dou5.png"
+		},
+		{
+			"name": "dou6_png",
+			"type": "image",
+			"url": "assets/dou/dou6.png"
+		},
+		{
+			"name": "dou7_png",
+			"type": "image",
+			"url": "assets/dou/dou7.png"
+		},
+		{
+			"name": "dou8_png",
+			"type": "image",
+			"url": "assets/dou/dou8.png"
+		},
+		{
+			"name": "dou9_png",
+			"type": "image",
+			"url": "assets/dou/dou9.png"
+		},
+		{
+			"name": "bowatt1_png",
+			"type": "image",
+			"url": "assets/bowatt/bowatt1.png"
+		},
+		{
+			"name": "bowatt2_png",
+			"type": "image",
+			"url": "assets/bowatt/bowatt2.png"
+		},
+		{
+			"name": "bowatt3_png",
+			"type": "image",
+			"url": "assets/bowatt/bowatt3.png"
+		},
+		{
+			"name": "bowatt4_png",
+			"type": "image",
+			"url": "assets/bowatt/bowatt4.png"
+		},
+		{
+			"name": "bowatt5_png",
+			"type": "image",
+			"url": "assets/bowatt/bowatt5.png"
+		},
+		{
+			"name": "bowatt6_png",
+			"type": "image",
+			"url": "assets/bowatt/bowatt6.png"
+		},
+		{
+			"name": "bowatt7_png",
+			"type": "image",
+			"url": "assets/bowatt/bowatt7.png"
+		},
+		{
+			"name": "bowatt8_png",
+			"type": "image",
+			"url": "assets/bowatt/bowatt8.png"
+		},
+		{
+			"name": "bowrun1_png",
+			"type": "image",
+			"url": "assets/bowrun/bowrun1.png"
+		},
+		{
+			"name": "bowrun2_png",
+			"type": "image",
+			"url": "assets/bowrun/bowrun2.png"
+		},
+		{
+			"name": "bowrun3_png",
+			"type": "image",
+			"url": "assets/bowrun/bowrun3.png"
+		},
+		{
+			"name": "bowrun4_png",
+			"type": "image",
+			"url": "assets/bowrun/bowrun4.png"
+		},
+		{
+			"name": "bowrun5_png",
+			"type": "image",
+			"url": "assets/bowrun/bowrun5.png"
+		},
+		{
+			"name": "bowrun6_png",
+			"type": "image",
+			"url": "assets/bowrun/bowrun6.png"
+		},
+		{
+			"name": "bowrun7_png",
+			"type": "image",
+			"url": "assets/bowrun/bowrun7.png"
+		},
+		{
+			"name": "bowrun8_png",
+			"type": "image",
+			"url": "assets/bowrun/bowrun8.png"
+		},
+		{
+			"name": "spearatt1_png",
+			"type": "image",
+			"url": "assets/spearatt/spearatt1.png"
+		},
+		{
+			"name": "spearatt10_png",
+			"type": "image",
+			"url": "assets/spearatt/spearatt10.png"
+		},
+		{
+			"name": "spearatt2_png",
+			"type": "image",
+			"url": "assets/spearatt/spearatt2.png"
+		},
+		{
+			"name": "spearatt3_png",
+			"type": "image",
+			"url": "assets/spearatt/spearatt3.png"
+		},
+		{
+			"name": "spearatt4_png",
+			"type": "image",
+			"url": "assets/spearatt/spearatt4.png"
+		},
+		{
+			"name": "spearatt5_png",
+			"type": "image",
+			"url": "assets/spearatt/spearatt5.png"
+		},
+		{
+			"name": "spearatt6_png",
+			"type": "image",
+			"url": "assets/spearatt/spearatt6.png"
+		},
+		{
+			"name": "spearatt7_png",
+			"type": "image",
+			"url": "assets/spearatt/spearatt7.png"
+		},
+		{
+			"name": "spearatt8_png",
+			"type": "image",
+			"url": "assets/spearatt/spearatt8.png"
+		},
+		{
+			"name": "spearatt9_png",
+			"type": "image",
+			"url": "assets/spearatt/spearatt9.png"
+		},
+		{
+			"name": "spearrun1_png",
+			"type": "image",
+			"url": "assets/spearrun/spearrun1.png"
+		},
+		{
+			"name": "spearrun2_png",
+			"type": "image",
+			"url": "assets/spearrun/spearrun2.png"
+		},
+		{
+			"name": "spearrun3_png",
+			"type": "image",
+			"url": "assets/spearrun/spearrun3.png"
+		},
+		{
+			"name": "spearrun4_png",
+			"type": "image",
+			"url": "assets/spearrun/spearrun4.png"
+		},
+		{
+			"name": "spearrun5_png",
+			"type": "image",
+			"url": "assets/spearrun/spearrun5.png"
+		},
+		{
+			"name": "spearrun6_png",
+			"type": "image",
+			"url": "assets/spearrun/spearrun6.png"
+		},
+		{
+			"name": "spearrun7_png",
+			"type": "image",
+			"url": "assets/spearrun/spearrun7.png"
+		},
+		{
+			"name": "spearrun8_png",
+			"type": "image",
+			"url": "assets/spearrun/spearrun8.png"
 		}
 	]
 }

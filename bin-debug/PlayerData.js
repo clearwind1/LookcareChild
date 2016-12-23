@@ -9,10 +9,18 @@ var PlayerData = (function () {
             nickname: '',
             openid: '',
             jifen: 0,
+            killsoldier: 0,
+            killgeneral: 0,
             shareopenid: '',
         };
+        this.initdata();
     }
     var d = __define,c=PlayerData,p=c.prototype;
+    p.initdata = function () {
+        this.UserInfo.jifen = 0;
+        this.UserInfo.killsoldier = 0;
+        this.UserInfo.killgeneral = 0;
+    };
     PlayerData._i = function () {
         return (this._inst = (this._inst == null ? new PlayerData() : this._inst));
     };

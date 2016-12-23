@@ -122,7 +122,7 @@ module GameUtil
 
     export function setscreenY(y:number):number{
         if(y >= GameConfig.DesignHeight/2){
-            return GameConfig._i().getSH() - (GameConfig.DesignHeight-y);
+            return GameConfig.getSH() - (GameConfig.DesignHeight-y);
         }else
         {
             return y;
@@ -179,10 +179,40 @@ module GameUtil
             objtarget.y = objfixed.y-objfixed.height/2 + posy;
         }
     }
+    /**
+     * 绝对位置x
+     * @dis 与右边距的距离
+     */
+    export function absposx(dis:number): number
+    {
+        return (GameConfig.getSW() - dis);
+    }
+    /**
+     * 绝对位置y
+     * @dis 与底部边距的距离
+     */
+    export function absposy(dis: number): number
+    {
+        return (GameConfig.getSH() - dis);
+    }
 
     export function trace(...optionalParams: any[]): void {
         optionalParams[0] = "[DebugLog]" + optionalParams[0];
         console.log.apply(console, optionalParams);
+    }
+    /**
+     * 获取两者间较大者
+     */
+    export function MAX(a: any, b: any): any
+    {
+        return (a > b ? a : b);
+    }
+    /**
+     * 获取两者间较小者
+     */
+    export function MIN(a: any, b: any): any
+    {
+        return (a < b ? a : b);
     }
 
 }

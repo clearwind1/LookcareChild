@@ -71,6 +71,10 @@ var GameUtil;
             this.menuSelectTexture = RES.getRes(select);
             this.btnImg.setNewTexture(this.menuNormalTexture);
         };
+        /**
+         * 给按钮添加图片
+         * @img 图片资源名
+         */
         p.addButtonImg = function (img, offx, offy) {
             if (offx === void 0) { offx = 0; }
             if (offy === void 0) { offy = 0; }
@@ -80,6 +84,11 @@ var GameUtil;
         p.setAddImgTexture = function (img) {
             this.addImg.setNewTexture(RES.getRes(img));
         };
+        /**
+         * 给按钮添加文字
+         * @text 文字内容
+         * @size 文字大小
+         */
         p.addButtonText = function (text, size, offx, offy) {
             if (offx === void 0) { offx = 0; }
             if (offy === void 0) { offy = 0; }

@@ -81,7 +81,10 @@ module GameUtil {
             this.menuSelectTexture = RES.getRes(select);
             this.btnImg.setNewTexture(this.menuNormalTexture);
         }
-
+        /**
+         * 给按钮添加图片
+         * @img 图片资源名
+         */
         public addButtonImg(img: string, offx: number = 0, offy: number = 0): void {
             this.addImg = new MyBitmap(RES.getRes(img), offx, offy);
             this.addChild(this.addImg);
@@ -89,7 +92,11 @@ module GameUtil {
         public setAddImgTexture(img: string) {
             this.addImg.setNewTexture(RES.getRes(img));
         }
-
+        /**
+         * 给按钮添加文字
+         * @text 文字内容
+         * @size 文字大小
+         */
         public addButtonText(text: string, size: number, offx: number = 0, offy: number = 0): void {
             if (this.btnImg.texture != null) {
                 //console.log("fdsafdsafdsa=====",this.btnImg.texture.$getTextureWidth()/2);

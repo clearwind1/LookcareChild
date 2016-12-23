@@ -120,7 +120,7 @@ var GameUtil;
     GameUtil.getQueryString = getQueryString;
     function setscreenY(y) {
         if (y >= GameConfig.DesignHeight / 2) {
-            return GameConfig._i().getSH() - (GameConfig.DesignHeight - y);
+            return GameConfig.getSH() - (GameConfig.DesignHeight - y);
         }
         else {
             return y;
@@ -176,14 +176,44 @@ var GameUtil;
         }
     }
     GameUtil.relativepos = relativepos;
+    /**
+     * 绝对位置x
+     * @dis 与右边距的距离
+     */
+    function absposx(dis) {
+        return (GameConfig.getSW() - dis);
+    }
+    GameUtil.absposx = absposx;
+    /**
+     * 绝对位置y
+     * @dis 与底部边距的距离
+     */
+    function absposy(dis) {
+        return (GameConfig.getSH() - dis);
+    }
+    GameUtil.absposy = absposy;
     function trace() {
         var optionalParams = [];
-        for (var _a = 0; _a < arguments.length; _a++) {
-            optionalParams[_a - 0] = arguments[_a];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            optionalParams[_i - 0] = arguments[_i];
         }
         optionalParams[0] = "[DebugLog]" + optionalParams[0];
         console.log.apply(console, optionalParams);
     }
     GameUtil.trace = trace;
+    /**
+     * 获取两者间较大者
+     */
+    function MAX(a, b) {
+        return (a > b ? a : b);
+    }
+    GameUtil.MAX = MAX;
+    /**
+     * 获取两者间较小者
+     */
+    function MIN(a, b) {
+        return (a < b ? a : b);
+    }
+    GameUtil.MIN = MIN;
 })(GameUtil || (GameUtil = {}));
 //# sourceMappingURL=utils.js.map

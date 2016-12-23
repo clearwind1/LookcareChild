@@ -49,7 +49,6 @@ class Main extends egret.DisplayObjectContainer {
                 }
             }
             else {
-
                 if (!GameUtil.getQueryString('shareopenid')) {
                     PlayerData._i().UserInfo.shareopenid = null;
                 }
@@ -71,17 +70,12 @@ class Main extends egret.DisplayObjectContainer {
         }
 
     }
-
     /**
      * 创建游戏场景
      * Create a game scene
      */
     private createGameScene(): void {
-
         GameUtil.Http.getinstance();
-
-        GameConfig._i().setStageHeight(this.stage.stageHeight);
-        GameConfig._i().setStageWidth(this.stage.stageWidth);
         GameUtil.GameScene.runscene(new StartGameScene());
 
     }

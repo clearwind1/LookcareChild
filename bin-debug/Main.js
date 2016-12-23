@@ -73,8 +73,6 @@ var Main = (function (_super) {
      */
     p.createGameScene = function () {
         GameUtil.Http.getinstance();
-        GameConfig._i().setStageHeight(this.stage.stageHeight);
-        GameConfig._i().setStageWidth(this.stage.stageWidth);
         GameUtil.GameScene.runscene(new StartGameScene());
     };
     return Main;
