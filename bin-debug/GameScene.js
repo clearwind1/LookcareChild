@@ -16,21 +16,34 @@ var GameScene = (function (_super) {
      * 显示背景
      */
     p.showbg = function () {
-        var gamebg = new MyBitmap(RES.getRes('gamebg_png'), 0, 0);
+        var gamebg = new MyBitmap(RES.getRes('gamebg_jpg'), 0, 0);
         gamebg.setanchorOff(0, 0);
         gamebg.width = this.mStageW;
         gamebg.height = this.mStageH;
         this.addChild(gamebg);
+        /**创建敌人容器 */
+        this.enemyContain = new egret.DisplayObjectContainer();
+        this.addChild(this.enemyContain);
+        /**创建玩家 */
         this.player = new Player();
         this.addChild(this.player);
+        /**创建时间 */
         var timetextstyle = { 'x': GameUtil.absposx(100), 'y': 40, 'size': 35, 'color': 0xffffff };
         this.gametime = new TimePanel();
         this.gametime.initdata(TimeType.ADDTIME, 0, true, timetextstyle);
         this.addChild(this.gametime);
         this.gametime.start();
+        this.createEnemy();
+        this.addChild(new ControlPanel());
     };
     p.getPlayer = function () {
         return this.player;
+    };
+    p.createEnemy = function () {
+        var enemysp = new EnemySprite();
+        enemysp.initdata(EnemyType.SOLDIER);
+        this.enemyContain.addChild(enemysp);
+        enemysp.start();
     };
     return GameScene;
 }(GameUtil.BassPanel));

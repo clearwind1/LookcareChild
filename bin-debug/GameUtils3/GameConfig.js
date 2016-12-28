@@ -68,7 +68,8 @@ var GameConfig = (function () {
     GameConfig.DesignHeight = 1334; //游戏设计尺寸高
     /**基本配置结束 */
     /**开发游戏配置 */
-    GameConfig.PLAYERLIFE = 10;
+    GameConfig.PLAYERLIFE = 100;
+    GameConfig.PLAYERENERGY = 100;
     GameConfig._instance = null;
     return GameConfig;
 }());

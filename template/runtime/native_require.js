@@ -10,8 +10,10 @@ var game_file_list = [
 	"libs/modules/res/res.js",
 	"libs/modules/weixinapi/weixinapi.js",
 	"bin-debug/BGMPlayer.js",
-	"bin-debug/GameData.js",
 	"bin-debug/GameUtils3/BassPanel.js",
+	"bin-debug/ControlPanel.js",
+	"bin-debug/EnemySprite.js",
+	"bin-debug/GameData.js",
 	"bin-debug/Othercontainer.js",
 	"bin-debug/GameHelpPageShow.js",
 	"bin-debug/GameOverPageShow.js",
@@ -38,6 +40,7 @@ var game_file_list = [
 	"bin-debug/GameUtils3/RandomUtils.js",
 	"bin-debug/GameUtils3/ScrollView.js",
 	"bin-debug/GameUtils3/SharePage.js",
+	"bin-debug/GameUtils3/Timercontrol.js",
 	"bin-debug/GameUtils3/TipsPanel.js",
 	"bin-debug/GameUtils3/WaitServerPanel.js",
 	"bin-debug/GameUtils3/utils.js",
@@ -88,7 +91,7 @@ egret_native.egretStart = function () {
         //以下为自动修改，请勿修改
         //----auto option start----
 		entryClassName: "Main",
-		frameRate: 30,
+		frameRate: 60,
 		scaleMode: "showAll",
 		contentWidth: 640,
 		contentHeight: 1136,

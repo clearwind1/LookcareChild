@@ -15,7 +15,7 @@ class StartGameScene extends GameUtil.BassPanel {
     private showbg() {
         var shap: egret.Shape = GameUtil.createRect(0, 0, this.mStageW, this.mStageH, 1, 0x9eefd8);
         this.addChild(shap);
-        var bg: MyBitmap = new MyBitmap(RES.getRes('startgamebg_png'), this.mStageW / 2, this.mStageH / 2);
+        var bg: MyBitmap = new MyBitmap(RES.getRes('startgamebg_jpg'), this.mStageW / 2, this.mStageH / 2);
         this.addChild(bg);
 
         //界面按钮

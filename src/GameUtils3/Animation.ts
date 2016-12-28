@@ -12,6 +12,8 @@ class Animation extends MyBitmap {
     private bLoopCount: number = 0;
     private endcallfun: Function = null;
     private thisObj: any = null;
+    private params: any[] = [];
+    private bremove: boolean = true;
 
     private intervaltag: number;
 
@@ -38,6 +40,9 @@ class Animation extends MyBitmap {
         if (bloopcount == 0)
             bloopcount = 1;
         this.bLoopCount = bloopcount - 1;
+    }
+    public setRemove(bremove: boolean) {
+        this.bremove = bremove;
     }
     /**播放 */
     public play(): void {
@@ -73,8 +78,9 @@ class Animation extends MyBitmap {
             if (this.bLoopCount == 0) {
                 this.stop();
                 if (this.endcallfun != null)
-                    this.endcallfun.apply(this.thisObj);
-                this.parent.removeChild(this);
+                    this.endcallfun.apply(this.thisObj, this.params);
+                if (this.bremove)
+                    this.parent.removeChild(this);
                 return;
             }
             else if (this.bLoopCount > 0) {
@@ -85,11 +91,14 @@ class Animation extends MyBitmap {
         this.setNewTexture(RES.getRes(this.textureName + this.currentNumber + '_png'));
     }
     /**切换动画 */
-    public switchani(textureName: string, totalNumber: number, loopcount: number = -1) {
+    public switchani(textureName: string, totalNumber: number, loopcount: number = -1, bremove: boolean = true) {
+        this.stop();
         this.textureName = textureName;
         this.totalNumber = totalNumber;
         this.currentNumber = 0;
         this.bLoopCount = loopcount;
+        this.bremove = bremove;
+        this.play();
     }
 
     /**
@@ -97,8 +106,9 @@ class Animation extends MyBitmap {
      * @param func {Function} 所要执行的函数
      * @param thisobj {any} 执行函数的stage
      */
-    public setendcall(func: Function, thisobj: any): void {
+    public setendcall(func: Function, thisobj: any, params?: any[]): void {
         this.thisObj = thisobj;
         this.endcallfun = func;
+        this.params = params;
     }
 }

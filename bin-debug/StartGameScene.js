@@ -15,7 +15,7 @@ var StartGameScene = (function (_super) {
     p.showbg = function () {
         var shap = GameUtil.createRect(0, 0, this.mStageW, this.mStageH, 1, 0x9eefd8);
         this.addChild(shap);
-        var bg = new MyBitmap(RES.getRes('startgamebg_png'), this.mStageW / 2, this.mStageH / 2);
+        var bg = new MyBitmap(RES.getRes('startgamebg_jpg'), this.mStageW / 2, this.mStageH / 2);
         this.addChild(bg);
         //界面按钮
         var btnname = ['startgamebtn_png', 'rankbtn_png', 'helpbtn_png', 'settingbtn_png', 'sharebtn_png'];

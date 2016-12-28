@@ -20,6 +20,11 @@ var PlayerData = (function () {
         this.UserInfo.jifen = 0;
         this.UserInfo.killsoldier = 0;
         this.UserInfo.killgeneral = 0;
+        this.speed = 20;
+        this.curweapon = Weapon.SPEAR;
+        this.curDir = Direction.END;
+        this.curlife = GameConfig.PLAYERLIFE;
+        this.curenergy = 0;
     };
     PlayerData._i = function () {
         return (this._inst = (this._inst == null ? new PlayerData() : this._inst));

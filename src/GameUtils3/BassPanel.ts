@@ -29,7 +29,7 @@ module GameUtil {
      *场景类
      */
     export class GameScene {
-        private static curScene: egret.DisplayObjectContainer = null;
+        public  static curScene: egret.DisplayObjectContainer = null;
         private static nextScene: egret.DisplayObjectContainer = null;
         private static MainStage: egret.Stage = null;
 

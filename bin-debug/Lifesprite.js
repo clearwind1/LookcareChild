@@ -33,11 +33,15 @@ var Lifesprite = (function (_super) {
         this.updatalifebar();
     };
     p.updatalifebar = function () {
-        this.lifemask.width *= (this.lifecount / this.life);
-        this.lifebar.mask = this.lifebar;
+        this.lifemask.width = this.lifebar.width * (this.lifecount / this.life);
+        this.lifebar.mask = this.lifemask;
     };
     p.getlife = function () {
         return this.lifecount;
+    };
+    p.setlife = function (value) {
+        this.lifecount = value;
+        this.updatalifebar();
     };
     return Lifesprite;
 }(GameUtil.BassPanel));

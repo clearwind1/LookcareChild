@@ -44,12 +44,17 @@ class Lifesprite extends GameUtil.BassPanel
     }
     private updatalifebar()
     {
-        this.lifemask.width *= (this.lifecount / this.life); 
-        this.lifebar.mask = this.lifebar;
+        this.lifemask.width = this.lifebar.width*(this.lifecount / this.life); 
+        this.lifebar.mask = this.lifemask;
     }
 
     public getlife(): number
     {
         return this.lifecount;
+    }
+    public setlife(value: number)
+    {
+        this.lifecount = value;
+        this.updatalifebar();
     }
 }    

@@ -33,7 +33,8 @@ class GameConfig {
     /**基本配置结束 */
 
     /**开发游戏配置 */
-    public static PLAYERLIFE: number = 10;
+    public static PLAYERLIFE: number = 100;
+    public static PLAYERENERGY: number = 100;
     /**开发游戏配置结束 */
 
     public constructor() {

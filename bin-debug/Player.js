@@ -2,14 +2,6 @@
  * Create by hardy on 16/12/22
  * 玩家类
  */
-/**武器类型：弓箭，枪 */
-var Weapon;
-(function (Weapon) {
-    Weapon[Weapon["SPEAR"] = 0] = "SPEAR";
-    Weapon[Weapon["BOW"] = 1] = "BOW";
-    Weapon[Weapon["END"] = 2] = "END";
-})(Weapon || (Weapon = {}));
-;
 /**方向 */
 var Direction;
 (function (Direction) {
@@ -27,154 +19,100 @@ var RoleState;
     RoleState[RoleState["ATT"] = 1] = "ATT";
 })(RoleState || (RoleState = {}));
 ;
+/**武器类型：弓箭，枪 */
+var Weapon;
+(function (Weapon) {
+    Weapon[Weapon["SPEAR"] = 0] = "SPEAR";
+    Weapon[Weapon["BOW"] = 1] = "BOW";
+    Weapon[Weapon["END"] = 2] = "END";
+})(Weapon || (Weapon = {}));
+;
 var Player = (function (_super) {
     __extends(Player, _super);
     function Player() {
         _super.call(this);
         this.zyaniname = [['spearrun', 'spearatt'], ['bowrun', 'bowatt']];
-        this.zyaniframe = [[8, 10], [8, 8]];
+        this.zyaniframe = [[8, 10], [8, 11]];
     }
     var d = __define,c=Player,p=c.prototype;
     p.init = function () {
-        this.speed = 20;
-        this.active = false;
-        this.curweapon = Weapon.SPEAR;
-        this.curDir = Direction.END;
+        this.batting = false;
         /**阿斗 */
         this.adourole = new Animation('dou', 10, 100, this.mStageW / 2, this.mStageH / 2);
         this.addChild(this.adourole);
         this.adourole.setLoop(-1);
         this.adourole.play();
+        /**攻击动画层 */
+        this.rolelayer = new egret.DisplayObjectContainer();
+        this.addChild(this.rolelayer);
         /**赵云 */
         var aniname = this.zyaniname[Weapon.SPEAR][RoleState.RUN];
         var aniframe = this.zyaniframe[Weapon.SPEAR][RoleState.RUN];
-        this.zhaoyunrole = new Animation(aniname, aniframe, 100, this.mStageW / 2, this.mStageH / 2 + 100);
+        this.zhaoyunrole = new Animation(aniname, aniframe, 80, this.mStageW / 2, this.mStageH / 2 + 100);
         this.addChild(this.zhaoyunrole);
         this.zhaoyunrole.setLoop(-1);
         this.zhaoyunrole.play();
-        this.controlPanel();
         /**玩家生命 */
         this.life = new Lifesprite(GameConfig.PLAYERLIFE);
-        this.life.x = 105;
-        this.life.y = 35;
+        this.life.x = this.adourole.x;
+        this.life.y = this.adourole.y - this.adourole.height / 2 - 30;
         this.addChild(this.life);
+        /**玩家能量 */
+        this.createEnergy();
         this.intertag = egret.setInterval(this.moving, this, 100);
     };
-    /**控制器 */
-    p.controlPanel = function () {
-        /**赵云移动控制器 */
-        var controlp = new MyBitmap(RES.getRes('controlp_png'), this.mStageW / 2, GameUtil.absposy(210));
-        this.addChild(controlp);
-        controlp.touchEnabled = true;
-        controlp.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.DirTouchBegin, this);
-        controlp.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.DirTouchMove, this);
-        controlp.addEventListener(egret.TouchEvent.TOUCH_END, this.DirTouchEnd, this);
-        controlp.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.DirTouchCancel, this);
-        /**移动按钮 */
-        var movebtnpos = [[195, 78], [295, 190], [195, 295], [86, 190]];
-        for (var dir = Direction.UP; dir < Direction.END; dir++) {
-            var movebtn = new MyBitmap(RES.getRes('spear_png'));
-            movebtn.name = '' + dir;
-            movebtn.$setScaleX(1.3);
-            movebtn.$setScaleY(1.3);
-            this.addChild(movebtn);
-            GameUtil.relativepos(movebtn, controlp, movebtnpos[dir][0], movebtnpos[dir][1]);
-        }
-        /**攻击按钮 */
-        var attbtn = new GameUtil.Menu(this, 'spear_png', 'spear_png', this.att);
-        attbtn.setBtnScale(1.6, 1.6);
-        this.addChild(attbtn);
-        GameUtil.relativepos(attbtn, controlp, 195, 190);
-        /**切换武器按钮 */
-        var swbName = ['spear_png', 'bow_png'];
-        for (var i = Weapon.SPEAR; i < Weapon.END; i++) {
-            var switchwb = new GameUtil.Menu(this, swbName[i], swbName[i], this.switchweapon, [i, attbtn]);
-            switchwb.setBtnScale(1.3, 1.3);
-            this.addChild(switchwb);
-            GameUtil.relativepos(switchwb, controlp, -75 + 525 * i, 222);
-        }
-    };
     /**切换武器 */
-    p.switchweapon = function (select, attbtn) {
-        if (select == this.curweapon)
-            return;
-        this.curweapon = select;
-        var swbName = ['spear_png', 'bow_png'];
-        attbtn.setButtonTexture(swbName[select], swbName[select]);
-        var aniname = this.zyaniname[this.curweapon][RoleState.RUN];
-        var aniframe = this.zyaniframe[this.curweapon][RoleState.RUN];
+    p.switchweapon = function () {
+        var aniname = this.zyaniname[PlayerData._i().curweapon][RoleState.RUN];
+        var aniframe = this.zyaniframe[PlayerData._i().curweapon][RoleState.RUN];
         this.zhaoyunrole.switchani(aniname, aniframe);
     };
     /**攻击 */
     p.att = function () {
-        var aniname = this.zyaniname[this.curweapon][RoleState.ATT];
-        var aniframe = this.zyaniframe[this.curweapon][RoleState.ATT];
-        this.zhaoyunrole.visible = false;
-        this.zhaoyunrole.currentNumber = 0;
-        this.zhaoyunrole.pause();
-        var tpzyatt = new Animation(aniname, aniframe, 50, this.zhaoyunrole.x, this.zhaoyunrole.y);
-        tpzyatt.setendcall(this.endatt, this);
-        this.addChild(tpzyatt);
-        tpzyatt.play();
+        if (this.batting) {
+            return;
+        }
+        this.batting = true;
+        var aniname = this.zyaniname[PlayerData._i().curweapon][RoleState.ATT];
+        var aniframe = this.zyaniframe[PlayerData._i().curweapon][RoleState.ATT];
+        this.zhaoyunrole.switchani(aniname, aniframe, 0, false);
+        this.zhaoyunrole.setendcall(this.endatt, this);
+        this.checkattenemy();
     };
     p.endatt = function () {
-        this.zhaoyunrole.visible = true;
-        this.zhaoyunrole.resume();
+        this.batting = false;
+        var aniname = this.zyaniname[PlayerData._i().curweapon][RoleState.RUN];
+        var aniframe = this.zyaniframe[PlayerData._i().curweapon][RoleState.RUN];
+        this.zhaoyunrole.switchani(aniname, aniframe, -1, false);
     };
-    p.DirTouchBegin = function (evt) {
-        if (this.active) {
-            return;
-        }
-        this.active = true;
-        for (var i = Direction.UP; i < Direction.END; i++) {
-            var dircontrolbtn = this.getChildByName('' + i);
-            var dir = parseInt(dircontrolbtn.name);
-            //console.log('evtstagex=====',evt.stageX,'evtstagey=====',evt.stageY);
-            if (dircontrolbtn.hitTestPoint(evt.$stageX, evt.stageY)) {
-                this.curDir = dir;
-                //this.playerrole.startmove(this.touchID);
-                break;
+    /**检测攻击结果 */
+    p.checkattenemy = function () {
+        var gamescene = (this.parent);
+        var enemycontain = gamescene.enemyContain;
+        for (var i = 0; i < enemycontain.numChildren; i++) {
+            var enemysp = enemycontain.getChildAt(i);
+            if (enemysp.bdie) {
+                continue;
             }
-        }
-    };
-    p.DirTouchMove = function (evt) {
-        if (!this.active) {
-            return;
-        }
-        for (var i = Direction.UP; i < Direction.END; i++) {
-            var dircontrolbtn = this.getChildByName('' + i);
-            var dir = parseInt(dircontrolbtn.name);
-            //console.log('evtstagex=====',evt.stageX,'evtstagey=====',evt.stageY);
-            if (dircontrolbtn.hitTestPoint(evt.$stageX, evt.stageY)) {
-                if (this.curDir != dir) {
-                    this.curDir = dir;
-                    //this.playerrole.stopmove();
-                    //this.playerrole.startmove(this.touchID);
+            if (PlayerData._i().curweapon == Weapon.SPEAR) {
+                var rect1 = this.getrect(this.zhaoyunrole, 1, 1);
+                var rect2 = this.getrect(enemysp.getsp(), 1, 0.9);
+                if (rect1.intersects(rect2)) {
+                    enemysp.beatt(1);
                     break;
                 }
             }
+            else {
+            }
         }
-    };
-    p.DirTouchEnd = function (evt) {
-        if (!this.active) {
-            return;
-        }
-        this.active = false;
-        // this.playerrole.stopmove();
-        this.curDir = Direction.END;
-    };
-    p.DirTouchCancel = function (evt) {
-        if (!this.active) {
-            return;
-        }
-        this.active = false;
-        //this.playerrole.stopmove();
-        this.curDir = Direction.END;
     };
     /**移动 */
     p.moving = function () {
-        var speed = this.speed;
-        switch (this.curDir) {
+        if (!this.checkrun()) {
+            return;
+        }
+        var speed = PlayerData._i().speed;
+        switch (PlayerData._i().curDir) {
             case Direction.UP:
                 this.zhaoyunrole.y = GameUtil.MAX(this.zhaoyunrole.y - speed, this.zhaoyunrole.height / 2);
                 var zyindex = this.getChildIndex(this.zhaoyunrole);
@@ -212,6 +150,64 @@ var Player = (function (_super) {
     };
     p.getadtouchpoint = function () {
         return this.adourole.y + 45;
+    };
+    /**检查赵云能否通过阿斗 */
+    p.checkrun = function () {
+        var disx = Math.abs(this.zhaoyunrole.x - this.adourole.x);
+        var disy = Math.abs(this.getzytouchpoint() - this.getadtouchpoint());
+        //console.log('zyyyy=====', this.getzytouchpoint(), 'adouy======', this.getadtouchpoint(), 'disx====', disx, 'disy====', disy);
+        switch (PlayerData._i().curDir) {
+            case Direction.UP:
+                if (this.getzytouchpoint() > this.getadtouchpoint() && (this.getzytouchpoint() - this.getadtouchpoint() < 36) && disx < 140) {
+                    return false;
+                }
+                break;
+            case Direction.DOWN:
+                if (this.getzytouchpoint() < this.getadtouchpoint() && (this.getzytouchpoint() - this.getadtouchpoint() > -36) && disx < 140) {
+                    return false;
+                }
+                break;
+            case Direction.LEFT:
+                if (this.zhaoyunrole.x > this.adourole.x && this.zhaoyunrole.x - this.adourole.x < 158 && disy < 25) {
+                    return false;
+                }
+                break;
+            case Direction.RIGHT:
+                if (this.zhaoyunrole.x < this.adourole.x && this.zhaoyunrole.x - this.adourole.x > -158 && disy < 25) {
+                    return false;
+                }
+                break;
+        }
+        return true;
+    };
+    /**获取碰撞矩形 */
+    p.getrect = function (obj, scx, scy) {
+        var rect = obj.getBounds();
+        rect.x = obj.x - obj.width * scx / 2;
+        rect.y = obj.y - obj.height * scy / 2;
+        rect.width = obj.width * scx;
+        rect.height = obj.height * scy;
+        // var sh: egret.Shape = GameUtil.createRect(rect.x, rect.y, rect.width, rect.height);
+        // this.parent.addChild(sh);
+        return rect;
+    };
+    p.createEnergy = function () {
+        var energybottle = new MyBitmap(RES.getRes('energyBottle_png'), 50, 56);
+        this.addChild(energybottle);
+        this.energy = new MyBitmap(RES.getRes('energy_png'), 50, 65);
+        this.addChild(this.energy);
+        this.energymask = GameUtil.createRect(28, 90, this.energy.width, this.energy.height);
+        this.addChild(this.energymask);
+        this.energy.mask = this.energymask;
+        //this.updataenergy();
+    };
+    /**更新玩家生命 */
+    p.updatalife = function () {
+        this.life.setlife(PlayerData._i().curlife);
+    };
+    /**更新玩家能量 */
+    p.updataenergy = function (value) {
+        this.energymask.y -= this.energy.height * (value / GameConfig.PLAYERENERGY);
     };
     return Player;
 }(GameUtil.BassPanel));

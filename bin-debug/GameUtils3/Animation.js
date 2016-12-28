@@ -17,6 +17,8 @@ var Animation = (function (_super) {
         this.bLoopCount = 0;
         this.endcallfun = null;
         this.thisObj = null;
+        this.params = [];
+        this.bremove = true;
         this.bpause = false;
         this.textureName = textureName;
         this.totalNumber = totalNumber;
@@ -31,6 +33,9 @@ var Animation = (function (_super) {
         if (bloopcount == 0)
             bloopcount = 1;
         this.bLoopCount = bloopcount - 1;
+    };
+    p.setRemove = function (bremove) {
+        this.bremove = bremove;
     };
     /**播放 */
     p.play = function () {
@@ -58,8 +63,9 @@ var Animation = (function (_super) {
             if (this.bLoopCount == 0) {
                 this.stop();
                 if (this.endcallfun != null)
-                    this.endcallfun.apply(this.thisObj);
-                this.parent.removeChild(this);
+                    this.endcallfun.apply(this.thisObj, this.params);
+                if (this.bremove)
+                    this.parent.removeChild(this);
                 return;
             }
             else if (this.bLoopCount > 0) {
@@ -69,21 +75,26 @@ var Animation = (function (_super) {
         this.setNewTexture(RES.getRes(this.textureName + this.currentNumber + '_png'));
     };
     /**切换动画 */
-    p.switchani = function (textureName, totalNumber, loopcount) {
+    p.switchani = function (textureName, totalNumber, loopcount, bremove) {
         if (loopcount === void 0) { loopcount = -1; }
+        if (bremove === void 0) { bremove = true; }
+        this.stop();
         this.textureName = textureName;
         this.totalNumber = totalNumber;
         this.currentNumber = 0;
         this.bLoopCount = loopcount;
+        this.bremove = bremove;
+        this.play();
     };
     /**
      * 动画播放完毕后要执行的函数
      * @param func {Function} 所要执行的函数
      * @param thisobj {any} 执行函数的stage
      */
-    p.setendcall = function (func, thisobj) {
+    p.setendcall = function (func, thisobj, params) {
         this.thisObj = thisobj;
         this.endcallfun = func;
+        this.params = params;
     };
     return Animation;
 }(MyBitmap));
