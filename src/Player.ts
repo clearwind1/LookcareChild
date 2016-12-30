@@ -28,7 +28,6 @@ class Player extends GameUtil.BassPanel {
 
     public init() {
         this.batting = false;
-
         /**阿斗 */
         this.adourole = new Animation('dou', 10, 100, this.mStageW / 2, this.mStageH / 2);
         this.addChild(this.adourole);
@@ -44,13 +43,11 @@ class Player extends GameUtil.BassPanel {
         this.addChild(this.zhaoyunrole);
         this.zhaoyunrole.setLoop(-1);
         this.zhaoyunrole.play();
-
         /**玩家生命 */
         this.life = new Lifesprite(GameConfig.PLAYERLIFE);
         this.life.x = this.adourole.x;
         this.life.y = this.adourole.y - this.adourole.height / 2 - 30;
         this.addChild(this.life);
-
         /**玩家能量 */
         this.createEnergy();
 
@@ -213,12 +210,23 @@ class Player extends GameUtil.BassPanel {
     }
     /**更新玩家生命 */
     public updatalife() {
+        if (GameData._i().GameOver) {
+            return;
+        }
+        if (PlayerData._i().curlife <= 0) {
+            (<GameScene>this.parent).gameover();
+            return;
+        }
         this.life.setlife(PlayerData._i().curlife);
     }
     /**更新玩家能量 */
-    public updataenergy(value:number)
-    {
-        this.energymask.y -= this.energy.height * (value / GameConfig.PLAYERENERGY); 
+    public updataenergy(value: number) {
+        this.energymask.y -= this.energy.height * (value / GameConfig.PLAYERENERGY);
+    }
+    /**重置 */
+    public reset() {
+        this.energymask.y = 90;
+        this.updatalife();
     }
 
 }

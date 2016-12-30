@@ -57,9 +57,6 @@ var ControlPanel = (function (_super) {
     p.att = function () {
         var gamescene = this.parent;
         gamescene.getPlayer().att();
-        var attpower = 10;
-        PlayerData._i().curenergy += attpower;
-        (GameUtil.GameScene.curScene).getPlayer().updataenergy(attpower);
     };
     p.DirTouchBegin = function (evt) {
         if (this.active) {

@@ -203,11 +203,23 @@ var Player = (function (_super) {
     };
     /**更新玩家生命 */
     p.updatalife = function () {
+        if (GameData._i().GameOver) {
+            return;
+        }
+        if (PlayerData._i().curlife <= 0) {
+            this.parent.gameover();
+            return;
+        }
         this.life.setlife(PlayerData._i().curlife);
     };
     /**更新玩家能量 */
     p.updataenergy = function (value) {
         this.energymask.y -= this.energy.height * (value / GameConfig.PLAYERENERGY);
+    };
+    /**重置 */
+    p.reset = function () {
+        this.energymask.y = 90;
+        this.updatalife();
     };
     return Player;
 }(GameUtil.BassPanel));

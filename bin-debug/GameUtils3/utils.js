@@ -215,5 +215,20 @@ var GameUtil;
         return (a < b ? a : b);
     }
     GameUtil.MIN = MIN;
+    /**
+     * 清除定时器
+     */
+    function clearinterval(intervalarr) {
+        //trace('clear interval====');
+        for (var i = 0; i < intervalarr.length; i++) {
+            var interval = intervalarr[i];
+            var index = intervalarr.indexOf(interval);
+            if (index > -1) {
+                egret.clearInterval(interval);
+                intervalarr.splice(index, 1);
+            }
+        }
+    }
+    GameUtil.clearinterval = clearinterval;
 })(GameUtil || (GameUtil = {}));
 //# sourceMappingURL=utils.js.map

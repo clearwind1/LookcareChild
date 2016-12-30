@@ -46,6 +46,7 @@ var TimePanel = (function (_super) {
      */
     p.start = function () {
         this.curtime = this.startTime;
+        this.updataTimetext();
         this.timetag = egret.setInterval(this.runtime, this, this.timespeed);
     };
     /**

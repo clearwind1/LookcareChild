@@ -10,7 +10,6 @@ class TimePanel extends GameUtil.BassPanel {
     private timetag: number;                    //时间定时器标志
     private type: TimeType;                     //时间类型：增，减
     private bpause: boolean;                    //时间暂停标志
-    //private bdisplaytext: boolean;              //是否显示时间
     private text: GameUtil.MyTextField;         //显示时间
 
     public constructor() {
@@ -49,6 +48,7 @@ class TimePanel extends GameUtil.BassPanel {
      */
     public start() {
         this.curtime = this.startTime;
+        this.updataTimetext();
         this.timetag = egret.setInterval(this.runtime, this, this.timespeed);
     }
     /**

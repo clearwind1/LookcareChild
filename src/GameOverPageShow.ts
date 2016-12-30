@@ -25,6 +25,7 @@ class GameOverPageShow extends Othercontainer
             GameUtil.Http.getinstance().send(param, "/" + GameConfig.SERVERNAME + "/updatekilldata", this.showscene, this);
         }
     }
+    /**显示 */
     private showscene(data:any)
     {
         if(data['code']==1)
@@ -34,8 +35,7 @@ class GameOverPageShow extends Othercontainer
             var gameovertext: MyBitmap = new MyBitmap(RES.getRes('gameovertext_png'));
             this.addChild(gameovertext);
             GameUtil.relativepos(gameovertext,gameoverbg,233,61);
-
-            //var btname: string[] = ['normalbtn_png','normalbtn_png','normalbtn_png'];
+            /**创建三个按钮 */
             var btname: string = 'normalbtn_png';
             var btntext: string[] = ['炫耀', '退出', '重来'];
             var btnfun: Function[] = [this.share,this.turnback,this.relife];
@@ -48,20 +48,22 @@ class GameOverPageShow extends Othercontainer
                 btn.getBtnText().$setBold(true);
                 GameUtil.relativepos(btn,gameoverbg,75+i*155,470);
             }
-
+            /**玩家数据显示 */
+            var gamescene: GameScene = <GameScene>this.parent;
             var infotext: string[] = ['杀敌:', '时长:', '杀将:', '总分:'];
-            var usetime = DateUtils.getFormatBySecond(300);
+            var usetime = DateUtils.getFormatBySecond(gamescene.getcurTime());
             var infoData: string[] = [PlayerData._i().UserInfo.killsoldier,usetime,PlayerData._i().UserInfo.killgeneral,PlayerData._i().UserInfo.jifen];
             for(var i:number=0;i < 4;i++)
             {
                 var textposx: number = 100;
                 var textposy: number = 115;
+                /**固定数据信息文字 */
                 var infoT:GameUtil.MyTextField = new GameUtil.MyTextField(0,0+60*i,50,0,0);
                 infoT.setText(infotext[i]);
                 infoT.textColor= 0x906128;
                 this.addChild(infoT);
                 GameUtil.relativepos(infoT,gameoverbg,textposx,textposy+60*i);
-
+                /**玩家数据信息文字 */
                 var infoTD:GameUtil.MyTextField = new GameUtil.MyTextField(0+130,0+60*i,50,0,0);
                 infoTD.setText(infoData[i]);
                 infoTD.textColor= 0x906128;
@@ -74,20 +76,25 @@ class GameOverPageShow extends Othercontainer
             data['msg'];
         }
     }
-
+    /**分享 */
     private share()
     {
         this.addChild(new SharePageShow());
     }
+    /**返回开始界面 */
     private turnback()
     {
         PlayerData._i().initdata();
+        GameData._i().GameOver = false;
         this.close();
         GameUtil.GameScene.runscene(new StartGameScene());
     }
+    /**复活 */
     private relife()
     {
         PlayerData._i().initdata();
+        GameData._i().GameOver = false;
+        (<GameScene>this.parent).reset();
         this.close();
     }
 

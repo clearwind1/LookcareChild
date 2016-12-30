@@ -1,8 +1,7 @@
 /**
  * Created by yang on 15/9/20.
  */
-module GameUtil
-{
+module GameUtil {
     /**
      * 创建矩形实心框
      * @param x {number} x轴坐标
@@ -13,13 +12,12 @@ module GameUtil
      * @param color {number} 颜色
      * @returns {egret.Shape}
      */
-    export function createRect(x:number,y:number,width:number,height:number,alpha:number=1,color:number=0x000000):egret.Shape
-    {
-        var shp:egret.Shape = new egret.Shape();
+    export function createRect(x: number, y: number, width: number, height: number, alpha: number = 1, color: number = 0x000000): egret.Shape {
+        var shp: egret.Shape = new egret.Shape();
         shp.x = x;
         shp.y = y;
-        shp.graphics.beginFill(color,alpha);
-        shp.graphics.drawRect(0,0,width,height);
+        shp.graphics.beginFill(color, alpha);
+        shp.graphics.drawRect(0, 0, width, height);
         shp.graphics.endFill();
         return shp;
     }
@@ -31,13 +29,12 @@ module GameUtil
      * @param alpha 透明度
      * @param color 颜色
      */
-    export function createCircle(x:number,y:number,r:number,alpha:number=1,color:number=0x000000):egret.Shape
-    {
-        var shp:egret.Shape = new egret.Shape();
+    export function createCircle(x: number, y: number, r: number, alpha: number = 1, color: number = 0x000000): egret.Shape {
+        var shp: egret.Shape = new egret.Shape();
         shp.x = x;
         shp.y = y;
-        shp.graphics.beginFill( color, alpha);
-        shp.graphics.drawCircle( 0, 0, r );
+        shp.graphics.beginFill(color, alpha);
+        shp.graphics.drawCircle(0, 0, r);
         shp.graphics.endFill();
         return shp;
     }
@@ -47,15 +44,13 @@ module GameUtil
      * @param postData
      * @returns {string}
      */
-    export function objectToString( postData ):string
-    {
+    export function objectToString(postData): string {
         var s = '';
-        for( var key in postData )
-        {
+        for (var key in postData) {
             var k_v = key + '=' + postData[key];
             s += k_v + '&';
         }
-        s = s.substr( 0, s.length - 1 );
+        s = s.substr(0, s.length - 1);
         return s;
     }
 
@@ -64,13 +59,11 @@ module GameUtil
      * @param name
      * @returns {boolean}
      */
-    export function isChineseName( name:string ):boolean
-    {
-        return /^[\u4e00-\u9fa5]+$/.test( name );
+    export function isChineseName(name: string): boolean {
+        return /^[\u4e00-\u9fa5]+$/.test(name);
     }
 
-    export function removeimag(name:string):string
-    {
+    export function removeimag(name: string): string {
 
         name = name.replace(/^/, '');
         return name;
@@ -81,10 +74,9 @@ module GameUtil
      * @param num
      * @returns {boolean}
      */
-    export function  isPhoneNum( num:string ):boolean
-    {
+    export function isPhoneNum(num: string): boolean {
         num = num.toUpperCase();
-        return /^0\d{2,3}-?\d{7,11}$|^1\d{10}$/.test( num );
+        return /^0\d{2,3}-?\d{7,11}$|^1\d{10}$/.test(num);
     }
 
     /**
@@ -92,15 +84,13 @@ module GameUtil
      * @param key {string} 文件的关键字
      * @param data {string} 文件内容
      */
-    export function saveLocalData(key:string,data:string)
-    {
-        egret.localStorage.setItem(key,data);
+    export function saveLocalData(key: string, data: string) {
+        egret.localStorage.setItem(key, data);
     }
-    export function readLocalData(key:string):string
-    {
+    export function readLocalData(key: string): string {
         return egret.localStorage.getItem(key);
     }
-    export function clearLocalData(key:string) {
+    export function clearLocalData(key: string) {
         if (key != null) {
             egret.localStorage.removeItem(key);
         }
@@ -120,11 +110,10 @@ module GameUtil
         if (r != null) return decodeURI(r[2]); return null;
     }
 
-    export function setscreenY(y:number):number{
-        if(y >= GameConfig.DesignHeight/2){
-            return GameConfig.getSH() - (GameConfig.DesignHeight-y);
-        }else
-        {
+    export function setscreenY(y: number): number {
+        if (y >= GameConfig.DesignHeight / 2) {
+            return GameConfig.getSH() - (GameConfig.DesignHeight - y);
+        } else {
             return y;
         }
     }
@@ -136,16 +125,13 @@ module GameUtil
      * @param backfun   完成回调函数
      * @param cont      函数域
      */
-    export function getredPack(money:number,openid:any,nickNm:string,backfun:Function,cont:any,url:string=GameConfig.IP)
-    {
-        var ipstr:string = window['getIP'];
+    export function getredPack(money: number, openid: any, nickNm: string, backfun: Function, cont: any, url: string = GameConfig.IP) {
+        var ipstr: string = window['getIP'];
         //console.log('ipstr======',ipstr);
         //alert('ipstr====='+ipstr);
         var ipstrspl: string;
-        for(var i: number=0;i < ipstr.split('|').length;i++)
-        {
-            if(ipstr.split('|')[i].length > 6)
-            {
+        for (var i: number = 0; i < ipstr.split('|').length; i++) {
+            if (ipstr.split('|')[i].length > 6) {
                 ipstrspl = ipstr.split('|')[i];
                 break;
             }
@@ -153,14 +139,14 @@ module GameUtil
         //alert('ipstrspl======'+ipstrspl);
         //console.log('ipstrspl====',ipstrspl);
         //console.log("money======", money);
-        var param:Object = {
+        var param: Object = {
             openId: openid,
             amount: money,
             ip: ipstrspl,
             nickname: nickNm,
             gameid: 0
         }
-        GameUtil.Http.getinstance().send(param, "/weixinpay/pay", backfun, cont,url);
+        GameUtil.Http.getinstance().send(param, "/weixinpay/pay", backfun, cont, url);
     }
 
     /**
@@ -171,28 +157,24 @@ module GameUtil
      * @param posy          y轴位置
      * @param anx
      */
-    export function relativepos(objtarget:any,objfixed:any,posx:number,posy:number,anx:boolean = false)
-    {
-        if(!anx)
-        {
-            objtarget.x = objfixed.x-objfixed.width/2 + posx;
-            objtarget.y = objfixed.y-objfixed.height/2 + posy;
+    export function relativepos(objtarget: any, objfixed: any, posx: number, posy: number, anx: boolean = false) {
+        if (!anx) {
+            objtarget.x = objfixed.x - objfixed.width / 2 + posx;
+            objtarget.y = objfixed.y - objfixed.height / 2 + posy;
         }
     }
     /**
      * 绝对位置x
      * @dis 与右边距的距离
      */
-    export function absposx(dis:number): number
-    {
+    export function absposx(dis: number): number {
         return (GameConfig.getSW() - dis);
     }
     /**
      * 绝对位置y
      * @dis 与底部边距的距离
      */
-    export function absposy(dis: number): number
-    {
+    export function absposy(dis: number): number {
         return (GameConfig.getSH() - dis);
     }
 
@@ -203,16 +185,29 @@ module GameUtil
     /**
      * 获取两者间较大者
      */
-    export function MAX(a: any, b: any): any
-    {
+    export function MAX(a: any, b: any): any {
         return (a > b ? a : b);
     }
     /**
      * 获取两者间较小者
      */
-    export function MIN(a: any, b: any): any
-    {
+    export function MIN(a: any, b: any): any {
         return (a < b ? a : b);
+    }
+    /**
+     * 清除定时器
+     */
+    export function clearinterval(intervalarr: any) {
+        //trace('clear interval====');
+        for (var i: number = 0; i < intervalarr.length; i++) {
+            var interval: number = intervalarr[i];
+            var index: number = intervalarr.indexOf(interval);
+            if (index > -1) {
+                egret.clearInterval(interval);
+                intervalarr.splice(index, 1);
+            }
+
+        }
     }
 
 }

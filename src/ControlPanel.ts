@@ -62,11 +62,9 @@ class ControlPanel extends GameUtil.BassPanel {
 	}
 
 	private DirTouchBegin(evt: egret.TouchEvent) {
-
         if (this.active) {
             return;
         }
-
         this.active = true;
         for (var i: Direction = Direction.UP; i < Direction.END; i++) {
             var dircontrolbtn: MyBitmap = <MyBitmap>this.getChildByName('' + i);
@@ -78,11 +76,9 @@ class ControlPanel extends GameUtil.BassPanel {
         }
     }
     private DirTouchMove(evt: egret.TouchEvent) {
-
         if (!this.active) {
             return;
         }
-
         for (var i: Direction = Direction.UP; i < Direction.END; i++) {
             var dircontrolbtn: MyBitmap = <MyBitmap>this.getChildByName('' + i);
             var dir = parseInt(dircontrolbtn.name);
@@ -95,11 +91,9 @@ class ControlPanel extends GameUtil.BassPanel {
         }
     }
     private DirTouchEnd(evt: egret.TouchEvent) {
-
         if (!this.active) {
             return;
         }
-
         this.active = false;
         PlayerData._i().curDir = Direction.END;
     }
@@ -107,7 +101,6 @@ class ControlPanel extends GameUtil.BassPanel {
         if (!this.active) {
             return;
         }
-
         this.active = false;
         PlayerData._i().curDir = Direction.END;
     }

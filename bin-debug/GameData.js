@@ -1,9 +1,10 @@
 /**
  * Created by pior on 16/12/15.
+ * 游戏数据
  */
 var GameData = (function () {
     function GameData() {
-        this.gamesound = [];
+        this.gamesound = []; //游戏声音
         this.init();
     }
     var d = __define,c=GameData,p=c.prototype;
