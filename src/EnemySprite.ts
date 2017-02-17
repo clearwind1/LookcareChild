@@ -8,7 +8,7 @@ class EnemySprite extends GameUtil.BassPanel {
     private type: EnemyType;                //类型
     private dir: number;                    //出场方向
     private spframe: number[] = [4, 10];    //不同状态的总帧数
-    private life: Lifesprite;               //生命值 
+    private life: Lifesprite;               //生命值
     private sp: Animation;                  //角色
     public bdie: boolean;                   //是否死亡
     //private atttag: number = -1;            //攻击定时器标志
