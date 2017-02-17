@@ -63,6 +63,9 @@ var Player = (function (_super) {
     };
     /**切换武器 */
     p.switchweapon = function () {
+        if (this.batting) {
+            return;
+        }
         var aniname = this.zyaniname[PlayerData._i().curweapon][RoleState.RUN];
         var aniframe = this.zyaniframe[PlayerData._i().curweapon][RoleState.RUN];
         this.zhaoyunrole.switchani(aniname, aniframe);
@@ -95,14 +98,20 @@ var Player = (function (_super) {
                 continue;
             }
             if (PlayerData._i().curweapon == Weapon.SPEAR) {
-                var rect1 = this.getrect(this.zhaoyunrole, 1, 1);
+                var rect1 = this.getrect(this.zhaoyunrole, 0.3, 0.7, 50 * this.zhaoyunrole.$getScaleX());
                 var rect2 = this.getrect(enemysp.getsp(), 1, 0.9);
                 if (rect1.intersects(rect2)) {
                     enemysp.beatt(1);
-                    break;
                 }
             }
             else {
+                var boweffect = new MyBitmap(RES.getRes('boweffect_png'), this.zhaoyunrole.x, this.zhaoyunrole.y);
+                this.parent.addChild(boweffect);
+                egret.Tween.get(boweffect).to({ x: enemysp.getsp().x, y: enemysp.getsp().y }, 200).call(function () {
+                    boweffect.parent.removeChild(boweffect);
+                    enemysp.beatt(1);
+                }, this);
+                break;
             }
         }
     };
@@ -181,25 +190,47 @@ var Player = (function (_super) {
         return true;
     };
     /**获取碰撞矩形 */
-    p.getrect = function (obj, scx, scy) {
+    p.getrect = function (obj, scx, scy, offx) {
+        if (offx === void 0) { offx = 0; }
         var rect = obj.getBounds();
-        rect.x = obj.x - obj.width * scx / 2;
+        rect.x = obj.x - obj.width * scx / 2 + offx;
         rect.y = obj.y - obj.height * scy / 2;
         rect.width = obj.width * scx;
         rect.height = obj.height * scy;
-        // var sh: egret.Shape = GameUtil.createRect(rect.x, rect.y, rect.width, rect.height);
-        // this.parent.addChild(sh);
+        //var sh: egret.Shape = GameUtil.createRect(rect.x, rect.y, rect.width, rect.height);
+        //this.parent.addChild(sh);
         return rect;
     };
     p.createEnergy = function () {
-        var energybottle = new MyBitmap(RES.getRes('energyBottle_png'), 50, 56);
+        var energybottle = new MyBitmap(RES.getRes('energyBottle_png'), 76, 88);
         this.addChild(energybottle);
-        this.energy = new MyBitmap(RES.getRes('energy_png'), 50, 65);
+        this.energy = new GameUtil.Menu(this, 'energy_png', 'energy_png', this.powatt);
+        this.energy.x = 76;
+        this.energy.y = 106;
         this.addChild(this.energy);
-        this.energymask = GameUtil.createRect(28, 90, this.energy.width, this.energy.height);
+        this.energymask = GameUtil.createRect(42, 150, this.energy.width, this.energy.height);
         this.addChild(this.energymask);
         this.energy.mask = this.energymask;
         //this.updataenergy();
+    };
+    /**能量满，放技能*/
+    p.powatt = function () {
+        if (PlayerData._i().curenergy >= GameConfig.PLAYERENERGY) {
+            var poweffect = new Animation('poweffect', 30, 100, this.mStageW / 2, this.mStageH / 2);
+            this.addChild(poweffect);
+            poweffect.play();
+            var gamescene = (this.parent);
+            var enemycontain = gamescene.enemyContain;
+            for (var i = 0; i < enemycontain.numChildren; i++) {
+                var enemysp = enemycontain.getChildAt(i);
+                if (enemysp.bdie) {
+                    continue;
+                }
+                enemysp.beatt(10000, true);
+            }
+            PlayerData._i().curenergy = 0;
+            this.energymask.y = 150;
+        }
     };
     /**更新玩家生命 */
     p.updatalife = function () {
@@ -218,7 +249,7 @@ var Player = (function (_super) {
     };
     /**重置 */
     p.reset = function () {
-        this.energymask.y = 90;
+        this.energymask.y = 150;
         this.updatalife();
     };
     return Player;

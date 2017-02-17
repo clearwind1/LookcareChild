@@ -59,14 +59,14 @@ class EnemySprite extends GameUtil.BassPanel {
         (<GameScene>(GameUtil.GameScene.curScene)).getPlayer().updatalife();
     }
     /**被攻击 */
-    public beatt(attpow: number) {
+    public beatt(attpow: number, bpowatt: boolean=false) {
         this.life.sublife(attpow);
         if (this.life.getlife() <= 0) {
-            this.die();
+            this.die(bpowatt);
         }
     }
     /**死亡 */
-    private die() {
+    private die(bpowatt: boolean) {
         this.bdie = true;
         this.sp.stop();
         // if (this.atttag != -1) {
@@ -78,12 +78,19 @@ class EnemySprite extends GameUtil.BassPanel {
         egret.Tween.removeTweens(this.sp);
         egret.Tween.removeTweens(this.life);
         /**死亡效果 */
-        egret.Tween.get(this).to({ visible: false }, 200).to({ visible: true }, 200).to({ visible: false }, 200).to({ visible: true }, 200).to({ visible: false }, 200).call(function () {
+        egret.Tween.get(this).to({ visible: false }, 100).to({ visible: true }, 100).to({ visible: false }, 100).to({ visible: true }, 100).to({ visible: false }, 100).call(function () {
             this.parent.removeChild(this);
-            /**玩家获得能量 */
-            var attpower: number = 1;
-            PlayerData._i().curenergy = GameUtil.MIN(PlayerData._i().curenergy + attpower, GameConfig.PLAYERENERGY);
-            (<GameScene>(GameUtil.GameScene.curScene)).getPlayer().updataenergy(attpower);
+            if (!bpowatt) {
+                /**玩家获得能量 */
+                var attpower: number = 50;
+                PlayerData._i().curenergy = PlayerData._i().curenergy + attpower;
+                if (PlayerData._i().curenergy > GameConfig.PLAYERENERGY) {
+                    PlayerData._i().curenergy = GameConfig.PLAYERENERGY;
+                }
+                else {
+                    (<GameScene>(GameUtil.GameScene.curScene)).getPlayer().updataenergy(attpower);
+                }
+            }
         }, this);
     }
     /**获取敌人角色 */

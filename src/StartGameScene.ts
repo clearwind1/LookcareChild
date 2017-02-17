@@ -81,6 +81,10 @@ class StartGameScene extends GameUtil.BassPanel {
     /**游戏分享 */
     private share() {
         GameUtil.trace('share');
-        this.addChild(new SharePageShow());        
+         if (!GameUtil.isWeiXin()) {
+            this.addChild(new GameUtil.TipsPanel(null, '请在微信中打开', true));
+         } else {
+             this.addChild(new SharePageShow());
+        }
     }
 }

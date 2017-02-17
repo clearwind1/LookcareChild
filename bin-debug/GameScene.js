@@ -41,7 +41,7 @@ var GameScene = (function (_super) {
     /**游戏定时器 */
     p.gameinterval = function () {
         GameUtil.trace('interval');
-        this.intervalarr.push(egret.setInterval(this.createEnemy, this, 1000));
+        this.intervalarr.push(egret.setInterval(this.createEnemy, this, 2000));
     };
     /**获取玩家类 */
     p.getPlayer = function () {
@@ -53,6 +53,9 @@ var GameScene = (function (_super) {
     };
     /**创建敌人 */
     p.createEnemy = function () {
+        if (GameData._i().GamePause) {
+            return;
+        }
         var enemysp = new EnemySprite();
         var dir = RandomUtils.limitInteger(0, 5);
         enemysp.initdata(EnemyType.SOLDIER, dir);

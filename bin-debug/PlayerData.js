@@ -13,6 +13,7 @@ var PlayerData = (function () {
             killgeneral: 0,
             shareopenid: '',
         };
+        this.curweapon = Weapon.END; //当前武器
         this.initdata();
     }
     var d = __define,c=PlayerData,p=c.prototype;
@@ -21,7 +22,7 @@ var PlayerData = (function () {
         this.UserInfo.killsoldier = 0;
         this.UserInfo.killgeneral = 0;
         this.speed = 20;
-        this.curweapon = Weapon.SPEAR;
+        this.curweapon = (this.curweapon == Weapon.END) ? Weapon.SPEAR : this.curweapon;
         this.curDir = Direction.END;
         this.curlife = GameConfig.PLAYERLIFE;
         this.curenergy = 0;

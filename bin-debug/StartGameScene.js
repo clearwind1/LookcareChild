@@ -78,7 +78,12 @@ var StartGameScene = (function (_super) {
     /**游戏分享 */
     p.share = function () {
         GameUtil.trace('share');
-        this.addChild(new SharePageShow());
+        if (!GameUtil.isWeiXin()) {
+            this.addChild(new GameUtil.TipsPanel(null, '请在微信中打开', true));
+        }
+        else {
+            this.addChild(new SharePageShow());
+        }
     };
     return StartGameScene;
 }(GameUtil.BassPanel));

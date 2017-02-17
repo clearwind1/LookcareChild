@@ -56,7 +56,7 @@ class Main extends egret.DisplayObjectContainer {
                     PlayerData._i().UserInfo.shareopenid = GameUtil.getQueryString('shareopenid');
                 }
                 /**配置游戏基本信息 */
-                this.stage.scaleMode = egret.StageScaleMode.FIXED_NARROW;
+                this.stage.scaleMode = egret.StageScaleMode.FIXED_NARROW;  
                 this.stage.setContentSize(GameConfig.DesignWidth, GameConfig.DesignHeight);
                 GameUtil.GameScene.init(this.stage);
                 GameUtil.GameScene.runscene(new GameUtil.LoadingPanel(this.createGameScene, this, 0, 0));

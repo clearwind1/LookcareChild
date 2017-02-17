@@ -48,7 +48,7 @@ class GameScene extends GameUtil.BassPanel {
     /**游戏定时器 */
     private gameinterval() {
         GameUtil.trace('interval');
-        this.intervalarr.push(egret.setInterval(this.createEnemy, this, 1000));
+        this.intervalarr.push(egret.setInterval(this.createEnemy, this, 2000));
     }
     /**获取玩家类 */
     public getPlayer(): Player {
@@ -60,6 +60,9 @@ class GameScene extends GameUtil.BassPanel {
     }
     /**创建敌人 */
     private createEnemy() {
+        if (GameData._i().GamePause) {
+            return;
+        }
         var enemysp: EnemySprite = new EnemySprite();
         var dir: number = RandomUtils.limitInteger(0, 5);
         enemysp.initdata(EnemyType.SOLDIER, dir);

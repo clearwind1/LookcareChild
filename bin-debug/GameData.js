@@ -9,6 +9,7 @@ var GameData = (function () {
     }
     var d = __define,c=GameData,p=c.prototype;
     p.init = function () {
+        this.GamePause = false;
         this.GameOver = false;
         this.isLoadingend = false;
     };

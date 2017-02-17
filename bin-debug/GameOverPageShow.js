@@ -72,7 +72,12 @@ var GameOverPageShow = (function (_super) {
     };
     /**分享 */
     p.share = function () {
-        this.addChild(new SharePageShow());
+        if (!GameUtil.isWeiXin()) {
+            this.addChild(new GameUtil.TipsPanel(null, '请在微信中打开', true));
+        }
+        else {
+            this.addChild(new SharePageShow());
+        }
     };
     /**返回开始界面 */
     p.turnback = function () {

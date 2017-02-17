@@ -5,7 +5,7 @@
 			"name": "preloading"
 		},
 		{
-			"keys": "startgamebtn_png,helpbtn_png,rankbtn_png,settingbtn_png,sharebtn_png,closebtn_png,rankbg_png,bow_png,help_controlimg_png,helpbg_png,helppagepoint_png,helpselect_png,spear_png,settingbg_png,settingswitch_png,settingswitchoff_png,settingswitchon_png,sharetip_png,gameoverbg_png,gameovertext_png,normalbtn_png,lifebar_png,lifeframe_png,controlp_png,dou1_png,dou10_png,dou2_png,dou3_png,dou4_png,dou5_png,dou6_png,dou7_png,dou8_png,dou9_png,bowatt1_png,bowatt2_png,bowatt3_png,bowatt4_png,bowatt5_png,bowatt6_png,bowatt7_png,bowatt8_png,bowrun1_png,bowrun2_png,bowrun3_png,bowrun4_png,bowrun5_png,bowrun6_png,bowrun7_png,bowrun8_png,spearatt1_png,spearatt10_png,spearatt2_png,spearatt3_png,spearatt4_png,spearatt5_png,spearatt6_png,spearatt7_png,spearatt8_png,spearatt9_png,spearrun1_png,spearrun2_png,spearrun3_png,spearrun4_png,spearrun5_png,spearrun6_png,spearrun7_png,spearrun8_png,rankcontain0_png,rankcontain1_png,rankcontain2_png,rankcontain3_png,rankcontain4_png,rankcontain5_png,rankcontain6_png,ranknum_png,gamebg_jpg,startgamebg_jpg,enemyatt11_png,enemyatt110_png,enemyatt12_png,enemyatt13_png,enemyatt14_png,enemyatt15_png,enemyatt16_png,enemyatt17_png,enemyatt18_png,enemyatt19_png,enemyrun11_png,enemyrun12_png,enemyrun13_png,enemyrun14_png,bowatt9_png,bowatt10_png,bowatt11_png,energy_png,energyBottle_png",
+			"keys": "startgamebtn_png,helpbtn_png,rankbtn_png,settingbtn_png,sharebtn_png,closebtn_png,rankbg_png,bow_png,help_controlimg_png,helpbg_png,helppagepoint_png,helpselect_png,spear_png,settingbg_png,settingswitch_png,settingswitchoff_png,settingswitchon_png,sharetip_png,gameoverbg_png,gameovertext_png,normalbtn_png,lifebar_png,lifeframe_png,controlp_png,dou1_png,dou10_png,dou2_png,dou3_png,dou4_png,dou5_png,dou6_png,dou7_png,dou8_png,dou9_png,bowatt1_png,bowatt2_png,bowatt3_png,bowatt4_png,bowatt5_png,bowatt6_png,bowatt7_png,bowatt8_png,bowrun1_png,bowrun2_png,bowrun3_png,bowrun4_png,bowrun5_png,bowrun6_png,bowrun7_png,bowrun8_png,spearatt1_png,spearatt10_png,spearatt2_png,spearatt3_png,spearatt4_png,spearatt5_png,spearatt6_png,spearatt7_png,spearatt8_png,spearatt9_png,spearrun1_png,spearrun2_png,spearrun3_png,spearrun4_png,spearrun5_png,spearrun6_png,spearrun7_png,spearrun8_png,rankcontain0_png,rankcontain1_png,rankcontain2_png,rankcontain3_png,rankcontain4_png,rankcontain5_png,rankcontain6_png,ranknum_png,gamebg_jpg,startgamebg_jpg,enemyatt11_png,enemyatt110_png,enemyatt12_png,enemyatt13_png,enemyatt14_png,enemyatt15_png,enemyatt16_png,enemyatt17_png,enemyatt18_png,enemyatt19_png,enemyrun11_png,enemyrun12_png,enemyrun13_png,enemyrun14_png,bowatt9_png,bowatt10_png,bowatt11_png,energy_png,energyBottle_png,boweffect_png,poweffect1_png,poweffect10_png,poweffect11_png,poweffect12_png,poweffect13_png,poweffect14_png,poweffect15_png,poweffect16_png,poweffect17_png,poweffect18_png,poweffect19_png,poweffect2_png,poweffect20_png,poweffect21_png,poweffect22_png,poweffect23_png,poweffect24_png,poweffect25_png,poweffect26_png,poweffect27_png,poweffect28_png,poweffect29_png,poweffect3_png,poweffect4_png,poweffect5_png,poweffect6_png,poweffect7_png,poweffect8_png,poweffect9_png,poweffect30_png",
 			"name": "preload"
 		}
 	],
@@ -504,6 +504,161 @@
 			"name": "energyBottle_png",
 			"type": "image",
 			"url": "assets/energyBottle.png"
+		},
+		{
+			"name": "boweffect_png",
+			"type": "image",
+			"url": "assets/boweffect.png"
+		},
+		{
+			"name": "poweffect1_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect1.png"
+		},
+		{
+			"name": "poweffect10_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect10.png"
+		},
+		{
+			"name": "poweffect11_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect11.png"
+		},
+		{
+			"name": "poweffect12_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect12.png"
+		},
+		{
+			"name": "poweffect13_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect13.png"
+		},
+		{
+			"name": "poweffect14_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect14.png"
+		},
+		{
+			"name": "poweffect15_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect15.png"
+		},
+		{
+			"name": "poweffect16_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect16.png"
+		},
+		{
+			"name": "poweffect17_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect17.png"
+		},
+		{
+			"name": "poweffect18_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect18.png"
+		},
+		{
+			"name": "poweffect19_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect19.png"
+		},
+		{
+			"name": "poweffect2_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect2.png"
+		},
+		{
+			"name": "poweffect20_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect20.png"
+		},
+		{
+			"name": "poweffect21_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect21.png"
+		},
+		{
+			"name": "poweffect22_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect22.png"
+		},
+		{
+			"name": "poweffect23_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect23.png"
+		},
+		{
+			"name": "poweffect24_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect24.png"
+		},
+		{
+			"name": "poweffect25_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect25.png"
+		},
+		{
+			"name": "poweffect26_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect26.png"
+		},
+		{
+			"name": "poweffect27_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect27.png"
+		},
+		{
+			"name": "poweffect28_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect28.png"
+		},
+		{
+			"name": "poweffect29_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect29.png"
+		},
+		{
+			"name": "poweffect3_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect3.png"
+		},
+		{
+			"name": "poweffect4_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect4.png"
+		},
+		{
+			"name": "poweffect5_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect5.png"
+		},
+		{
+			"name": "poweffect6_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect6.png"
+		},
+		{
+			"name": "poweffect7_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect7.png"
+		},
+		{
+			"name": "poweffect8_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect8.png"
+		},
+		{
+			"name": "poweffect9_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect9.png"
+		},
+		{
+			"name": "poweffect30_png",
+			"type": "image",
+			"url": "assets/poweffect/poweffect30.png"
 		}
 	]
 }

@@ -18,8 +18,6 @@ var GameUtil;
             if (sec === void 0) { sec = 1200; }
             _super.call(this);
             this.textsize = 30;
-            this.mStageW = egret.MainContext.instance.stage.stageWidth;
-            this.mStageH = egret.MainContext.instance.stage.stageHeight;
             this.tipText = tipText;
             this.tipImg = tipimg;
             this.bDisappear = disp;
@@ -28,22 +26,22 @@ var GameUtil;
         }
         var d = __define,c=TipsPanel,p=c.prototype;
         p.init = function () {
+            this.showtip();
             if (!this.bDisappear) {
-                var coverbg = GameUtil.createRect(0, 0, window.screen.availWidth, window.screen.availHeight, 0.4);
+                var coverbg = GameUtil.createRect(0, 0, GameConfig.getSW(), GameConfig.getSH(), 0.4);
                 this.addChild(coverbg);
                 this.touchEnabled = true;
             }
             if (this.tipImg == null) {
-                var tipbgcover = GameUtil.createRect(this.mStageW / 2, this.mStageH / 2, window.screen.availWidth, 100, 1, 0x8c8b88);
+                var tipbgcover = GameUtil.createRect(GameConfig.getSW() / 2, GameConfig.getSH() / 2, this.text.width * 2, this.text.height * 1.5, 1, 0x8c8b88);
                 tipbgcover.anchorOffsetX = tipbgcover.width / 2;
                 tipbgcover.anchorOffsetY = tipbgcover.height / 2;
                 this.addChild(tipbgcover);
             }
             else {
-                this.tipbg = new MyBitmap(RES.getRes(this.tipImg), this.mStageW / 2, this.mStageH / 2);
+                this.tipbg = new MyBitmap(RES.getRes(this.tipImg), GameConfig.getSW() / 2, GameConfig.getSH() / 2);
                 this.addChild(this.tipbg);
             }
-            this.showtip();
             if (!this.bDisappear) {
                 this.showbutton();
             }
@@ -51,15 +49,16 @@ var GameUtil;
                 var tw = egret.Tween.get(this);
                 tw.to({ alpha: 1 }, 300).to({ alpha: 0 }, this.disSecond).call(this.close, this);
             }
+            this.addChild(this.text);
         };
         /**
          * 显示提示文字
          */
         p.showtip = function () {
-            this.text = new GameUtil.MyTextField(this.mStageW / 2, this.mStageH / 2, this.textsize);
+            this.text = new GameUtil.MyTextField(GameConfig.getSW() / 2, GameConfig.getSH() / 2, this.textsize);
             this.text.setText(this.tipText);
             this.text.textColor = 0x000000;
-            this.addChild(this.text);
+            //this.addChild(this.text);
         };
         /**
          * 提示文字的长度
@@ -77,7 +76,7 @@ var GameUtil;
         };
         p.setTextHor = function (anchorX, anchorY, align, offx) {
             this.text.textAlign = align;
-            this.text.x = this.mStageW / 2 - this.tipbg.width / 2 + offx;
+            this.text.x = GameConfig.getSW() / 2 - this.tipbg.width / 2 + offx;
         };
         p.setTextlineSpacing = function (spacing) {
             this.text.lineSpacing = spacing;
@@ -87,8 +86,8 @@ var GameUtil;
          */
         p.showbutton = function () {
             var surebtn = new GameUtil.Menu(this, "acceptBtn_png", "acceptBtn_png", this.close);
-            surebtn.x = this.mStageW / 2;
-            surebtn.y = this.mStageH / 2 + this.tipbg.texture.textureHeight / 2;
+            surebtn.x = GameConfig.getSW() / 2;
+            surebtn.y = GameConfig.getSH() / 2 + this.tipbg.texture.textureHeight / 2;
             this.addChild(surebtn);
             surebtn.setScaleMode();
         };

@@ -5,6 +5,7 @@
 
 class GameData {
 
+    public GamePause: boolean;              //游戏暂停标志    
     public GameOver: boolean;               //游戏结束标志
     public isLoadingend: boolean;           //游戏加载进度结束标志
     public gamesound: MySound[] = [];       //游戏声音
@@ -15,6 +16,7 @@ class GameData {
 
     private init()
     {
+        this.GamePause = false;
         this.GameOver = false;
         this.isLoadingend = false;
     }

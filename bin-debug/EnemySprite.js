@@ -60,14 +60,15 @@ var EnemySprite = (function (_super) {
         (GameUtil.GameScene.curScene).getPlayer().updatalife();
     };
     /**被攻击 */
-    p.beatt = function (attpow) {
+    p.beatt = function (attpow, bpowatt) {
+        if (bpowatt === void 0) { bpowatt = false; }
         this.life.sublife(attpow);
         if (this.life.getlife() <= 0) {
-            this.die();
+            this.die(bpowatt);
         }
     };
     /**死亡 */
-    p.die = function () {
+    p.die = function (bpowatt) {
         this.bdie = true;
         this.sp.stop();
         // if (this.atttag != -1) {
@@ -79,12 +80,19 @@ var EnemySprite = (function (_super) {
         egret.Tween.removeTweens(this.sp);
         egret.Tween.removeTweens(this.life);
         /**死亡效果 */
-        egret.Tween.get(this).to({ visible: false }, 200).to({ visible: true }, 200).to({ visible: false }, 200).to({ visible: true }, 200).to({ visible: false }, 200).call(function () {
+        egret.Tween.get(this).to({ visible: false }, 100).to({ visible: true }, 100).to({ visible: false }, 100).to({ visible: true }, 100).to({ visible: false }, 100).call(function () {
             this.parent.removeChild(this);
-            /**玩家获得能量 */
-            var attpower = 1;
-            PlayerData._i().curenergy = GameUtil.MIN(PlayerData._i().curenergy + attpower, GameConfig.PLAYERENERGY);
-            (GameUtil.GameScene.curScene).getPlayer().updataenergy(attpower);
+            if (!bpowatt) {
+                /**玩家获得能量 */
+                var attpower = 50;
+                PlayerData._i().curenergy = PlayerData._i().curenergy + attpower;
+                if (PlayerData._i().curenergy > GameConfig.PLAYERENERGY) {
+                    PlayerData._i().curenergy = GameConfig.PLAYERENERGY;
+                }
+                else {
+                    (GameUtil.GameScene.curScene).getPlayer().updataenergy(attpower);
+                }
+            }
         }, this);
     };
     /**获取敌人角色 */
