@@ -75,6 +75,12 @@ var Player = (function (_super) {
         if (this.batting) {
             return;
         }
+        if (PlayerData._i().curweapon == Weapon.BOW) {
+            GameData._i().gamesound[SoundName.bowatt].play();
+        }
+        else {
+            GameData._i().gamesound[SoundName.spearatt].play();
+        }
         this.batting = true;
         var aniname = this.zyaniname[PlayerData._i().curweapon][RoleState.ATT];
         var aniframe = this.zyaniframe[PlayerData._i().curweapon][RoleState.ATT];
@@ -229,6 +235,9 @@ var Player = (function (_super) {
                 enemysp.beatt(10000, true);
             }
             PlayerData._i().curenergy = 0;
+            egret.Tween.removeTweens(this.energy);
+            this.energy.scaleX = 1;
+            this.energy.scaleY = 1;
             this.energymask.y = 150;
         }
     };
@@ -239,6 +248,7 @@ var Player = (function (_super) {
         }
         if (PlayerData._i().curlife <= 0) {
             this.parent.gameover();
+            GameData._i().gamesound[SoundName.fail].play();
             return;
         }
         this.life.setlife(PlayerData._i().curlife);
@@ -246,6 +256,9 @@ var Player = (function (_super) {
     /**更新玩家能量 */
     p.updataenergy = function (value) {
         this.energymask.y -= this.energy.height * (value / GameConfig.PLAYERENERGY);
+        if (PlayerData._i().curenergy == GameConfig.PLAYERENERGY) {
+            egret.Tween.get(this.energy, { loop: true }).to({ scaleX: 1.1, scaleY: 1.1 }, 500).to({ scaleX: 1, scaleY: 1 }, 500);
+        }
     };
     /**重置 */
     p.reset = function () {

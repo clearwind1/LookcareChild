@@ -7,7 +7,15 @@ var SoundName;
 (function (SoundName) {
     SoundName[SoundName["startgamebgm"] = 0] = "startgamebgm";
     SoundName[SoundName["gamebgm"] = 1] = "gamebgm";
-    SoundName[SoundName["end"] = 2] = "end";
+    SoundName[SoundName["bowatt"] = 2] = "bowatt";
+    SoundName[SoundName["enemyatt"] = 3] = "enemyatt";
+    SoundName[SoundName["spearatt"] = 4] = "spearatt";
+    SoundName[SoundName["die"] = 5] = "die";
+    SoundName[SoundName["fail"] = 6] = "fail";
+    SoundName[SoundName["goal"] = 7] = "goal";
+    SoundName[SoundName["beatt"] = 8] = "beatt";
+    SoundName[SoundName["click"] = 9] = "click";
+    SoundName[SoundName["end"] = 10] = "end";
 })(SoundName || (SoundName = {}));
 ;
 /**场景转换效果，对应：无效果，从左往右，淡入淡出，向两边分开 */
@@ -62,7 +70,8 @@ var GameConfig = (function () {
     GameConfig.FIRSTGAME = 'firstgame'; //第一次进游戏标示
     GameConfig.GAMESOUND = 'gamesound'; //游戏音效
     GameConfig.GAMEMUSIC = 'gamemusic'; //游戏音乐
-    GameConfig.SoundName = []; //声音文件名
+    GameConfig.SoundName = ['startgamebgm.mp3', 'gamebgm.mp3', 'bowatt.mp3', 'enemyatt.mp3', 'spearatt.mp3',
+        'die.mp3', 'fail.mp3', 'goal.mp3', 'beatt.mp3', 'click.mp3']; //声音文件名
     GameConfig.GUIDESTEPNUM = 2; //新手引导总步数
     GameConfig.DesignWidth = 750; //游戏设计尺寸宽
     GameConfig.DesignHeight = 1334; //游戏设计尺寸高

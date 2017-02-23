@@ -9,6 +9,7 @@ class GameData {
     public GameOver: boolean;               //游戏结束标志
     public isLoadingend: boolean;           //游戏加载进度结束标志
     public gamesound: MySound[] = [];       //游戏声音
+    public GameLevel: number;               //游戏等级
 
     public constructor() {
         this.init();
@@ -19,6 +20,7 @@ class GameData {
         this.GamePause = false;
         this.GameOver = false;
         this.isLoadingend = false;
+        this.GameLevel = 0;
     }
 
     private static _inst:GameData = null;

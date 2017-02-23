@@ -27,6 +27,7 @@ class StartGameScene extends GameUtil.BassPanel {
             var btn: GameUtil.Menu = new GameUtil.Menu(this, btnname[i], btnname[i], fun[i]);
             btn.setScaleMode();
             this.addChild(btn);
+            btn.setBtnSound(GameData._i().gamesound[SoundName.click]);
             GameUtil.relativepos(btn, bg, btnpox[i], btnpoy[i]);
         }
 

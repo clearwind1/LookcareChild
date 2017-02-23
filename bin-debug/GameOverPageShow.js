@@ -83,6 +83,7 @@ var GameOverPageShow = (function (_super) {
     p.turnback = function () {
         PlayerData._i().initdata();
         GameData._i().GameOver = false;
+        GameData._i().GameLevel = 0;
         this.close();
         GameUtil.GameScene.runscene(new StartGameScene());
     };
@@ -90,6 +91,7 @@ var GameOverPageShow = (function (_super) {
     p.relife = function () {
         PlayerData._i().initdata();
         GameData._i().GameOver = false;
+        GameData._i().GameLevel = 0;
         this.parent.reset();
         this.close();
     };

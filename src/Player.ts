@@ -70,6 +70,13 @@ class Player extends GameUtil.BassPanel {
         if (this.batting) {
             return;
         }
+
+        if (PlayerData._i().curweapon == Weapon.BOW) {
+            GameData._i().gamesound[SoundName.bowatt].play();
+        } else {
+            GameData._i().gamesound[SoundName.spearatt].play();
+        }      
+
         this.batting = true;
         var aniname: string = this.zyaniname[PlayerData._i().curweapon][RoleState.ATT];
         var aniframe: number = this.zyaniframe[PlayerData._i().curweapon][RoleState.ATT];
@@ -239,6 +246,9 @@ class Player extends GameUtil.BassPanel {
                 enemysp.beatt(10000, true);
             }
             PlayerData._i().curenergy = 0;
+            egret.Tween.removeTweens(this.energy);
+            this.energy.scaleX = 1;
+            this.energy.scaleY = 1;
             this.energymask.y = 150;
         }
     }
@@ -249,6 +259,7 @@ class Player extends GameUtil.BassPanel {
         }
         if (PlayerData._i().curlife <= 0) {
             (<GameScene>this.parent).gameover();
+            GameData._i().gamesound[SoundName.fail].play();
             return;
         }
         this.life.setlife(PlayerData._i().curlife);
@@ -256,6 +267,9 @@ class Player extends GameUtil.BassPanel {
     /**更新玩家能量 */
     public updataenergy(value: number) {
         this.energymask.y -= this.energy.height * (value / GameConfig.PLAYERENERGY);
+        if (PlayerData._i().curenergy == GameConfig.PLAYERENERGY) {
+            egret.Tween.get(this.energy, { loop: true }).to({ scaleX: 1.1, scaleY: 1.1 }, 500).to({ scaleX: 1, scaleY: 1 }, 500);
+        }
     }
     /**重置 */
     public reset() {

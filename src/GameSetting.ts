@@ -56,6 +56,7 @@ class GameSetting extends Othercontainer
 
         var volume = GameConfig._i().bgamemusic ? 1 : 0;
         //GameData._i().gamesound[SoundName.startgamebgm].setvolume(volume);
+        BGMPlayer._i().setVolme(volume);
 
     }
 }

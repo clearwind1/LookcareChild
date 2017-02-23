@@ -40,6 +40,7 @@ var ControlPanel = (function (_super) {
             var switchwb = new GameUtil.Menu(this, swbName[i], swbName[i], this.switchweapon, [i, attbtn]);
             switchwb.setBtnScale(1.3, 1.3);
             this.addChild(switchwb);
+            switchwb.setBtnSound(GameData._i().gamesound[SoundName.click]);
             GameUtil.relativepos(switchwb, controlp, -75 + 525 * i, 222);
         }
     };

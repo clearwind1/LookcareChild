@@ -49,6 +49,11 @@ class GameScene extends GameUtil.BassPanel {
     private gameinterval() {
         GameUtil.trace('interval');
         this.intervalarr.push(egret.setInterval(this.createEnemy, this, 2000));
+        this.intervalarr.push(egret.setInterval(this.updateGamelevel, this, 30000));
+    }
+    /**游戏等级提升 */
+    private updateGamelevel() {
+        GameData._i().GameLevel++;
     }
     /**获取玩家类 */
     public getPlayer(): Player {

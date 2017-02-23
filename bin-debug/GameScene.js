@@ -42,6 +42,11 @@ var GameScene = (function (_super) {
     p.gameinterval = function () {
         GameUtil.trace('interval');
         this.intervalarr.push(egret.setInterval(this.createEnemy, this, 2000));
+        this.intervalarr.push(egret.setInterval(this.updateGamelevel, this, 30000));
+    };
+    /**游戏等级提升 */
+    p.updateGamelevel = function () {
+        GameData._i().GameLevel++;
     };
     /**获取玩家类 */
     p.getPlayer = function () {

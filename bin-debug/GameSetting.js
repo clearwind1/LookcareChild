@@ -46,6 +46,7 @@ var GameSetting = (function (_super) {
         GameUtil.saveLocalData(GameConfig.GAMESOUND, ssoundv);
         var volume = GameConfig._i().bgamemusic ? 1 : 0;
         //GameData._i().gamesound[SoundName.startgamebgm].setvolume(volume);
+        BGMPlayer._i().setVolme(volume);
     };
     return GameSetting;
 }(Othercontainer));

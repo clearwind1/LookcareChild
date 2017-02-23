@@ -90,6 +90,7 @@ class GameOverPageShow extends Othercontainer
     {
         PlayerData._i().initdata();
         GameData._i().GameOver = false;
+        GameData._i().GameLevel = 0;
         this.close();
         GameUtil.GameScene.runscene(new StartGameScene());
     }
@@ -98,6 +99,7 @@ class GameOverPageShow extends Othercontainer
     {
         PlayerData._i().initdata();
         GameData._i().GameOver = false;
+        GameData._i().GameLevel = 0;
         (<GameScene>this.parent).reset();
         this.close();
     }
