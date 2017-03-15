@@ -48,11 +48,12 @@ class GameScene extends GameUtil.BassPanel {
     /**游戏定时器 */
     private gameinterval() {
         GameUtil.trace('interval');
-        this.intervalarr.push(egret.setInterval(this.createEnemy, this, 2000));
+        this.intervalarr.push(egret.setInterval(this.createEnemy, this, 3000));
         this.intervalarr.push(egret.setInterval(this.updateGamelevel, this, 30000));
     }
     /**游戏等级提升 */
     private updateGamelevel() {
+        //console.log('updategamelevel');
         GameData._i().GameLevel++;
     }
     /**获取玩家类 */
@@ -68,11 +69,22 @@ class GameScene extends GameUtil.BassPanel {
         if (GameData._i().GamePause) {
             return;
         }
-        var enemysp: EnemySprite = new EnemySprite();
-        var dir: number = RandomUtils.limitInteger(0, 5);
-        enemysp.initdata(EnemyType.SOLDIER, dir);
-        this.enemyContain.addChild(enemysp);
-        enemysp.start();
+        //console.log('createEnemy');
+        var lastdir: number = -1;
+        for (var i: number = 0; i <= GameUtil.MIN(Math.floor(GameData._i().GameLevel / 3), 4); i++) {
+            var enemysp: EnemySprite = new EnemySprite();
+            var dir: number = RandomUtils.limitInteger(0, 5);
+            if (lastdir != dir) {
+                lastdir = dir;
+            } else {
+                lastdir++;
+                lastdir = lastdir % 5;
+            }
+            enemysp.initdata(EnemyType.SOLDIER, lastdir);
+            this.enemyContain.addChild(enemysp);
+            enemysp.start();
+        }
+
     }
     /**游戏结束 */
     public gameover() {

@@ -15,9 +15,9 @@ class Player extends GameUtil.BassPanel {
     private life: Lifesprite;       //生命血量
 
     private adourole: Animation;    //阿斗
-    private zhaoyunrole: Animation; //赵云
+    public zhaoyunrole: Animation; //赵云
     private zyaniname: string[][] = [['spearrun', 'spearatt'], ['bowrun', 'bowatt']];
-    private zyaniframe: number[][] = [[8, 10], [8, 11]];
+    private zyaniframe: number[][] = [[8, 10], [8, 5]];
     private rolelayer: egret.DisplayObjectContainer;
 
     private intertag: number;       //定时器标志
@@ -41,6 +41,7 @@ class Player extends GameUtil.BassPanel {
         var aniname: string = this.zyaniname[Weapon.SPEAR][RoleState.RUN];
         var aniframe: number = this.zyaniframe[Weapon.SPEAR][RoleState.RUN];
         this.zhaoyunrole = new Animation(aniname, aniframe, 80, this.mStageW / 2, this.mStageH / 2 + 100);
+        this.zhaoyunrole.setanchorOff(0.3, 0.5);
         this.addChild(this.zhaoyunrole);
         this.zhaoyunrole.setLoop(-1);
         this.zhaoyunrole.play();
@@ -75,22 +76,20 @@ class Player extends GameUtil.BassPanel {
             GameData._i().gamesound[SoundName.bowatt].play();
         } else {
             GameData._i().gamesound[SoundName.spearatt].play();
-        }      
-
+        }
+ 
         this.batting = true;
         var aniname: string = this.zyaniname[PlayerData._i().curweapon][RoleState.ATT];
         var aniframe: number = this.zyaniframe[PlayerData._i().curweapon][RoleState.ATT];
-        this.zhaoyunrole.switchani(aniname, aniframe, 0, false);
+        this.zhaoyunrole.switchani(aniname, aniframe, 0, false, 20);
         this.zhaoyunrole.setendcall(this.endatt, this);
-
-        this.checkattenemy();
-
-    }
+    } 
     private endatt() {
+        this.checkattenemy();
         this.batting = false;
         var aniname: string = this.zyaniname[PlayerData._i().curweapon][RoleState.RUN];
         var aniframe: number = this.zyaniframe[PlayerData._i().curweapon][RoleState.RUN];
-        this.zhaoyunrole.switchani(aniname, aniframe, -1, false);
+        this.zhaoyunrole.switchani(aniname, aniframe, -1, false, 80);
     }
     /**检测攻击结果 */
     private checkattenemy() {
@@ -105,18 +104,26 @@ class Player extends GameUtil.BassPanel {
                 var rect1 = this.getrect(this.zhaoyunrole, 0.3, 0.7, 50 * this.zhaoyunrole.$getScaleX());
                 var rect2 = this.getrect(enemysp.getsp(), 1, 0.9);
                 if (rect1.intersects(rect2)) {
-                    enemysp.beatt(1);
+                    enemysp.beatt(GameConfig.PLAYERSPEARPOW);
                     //break;
                 }
             }
             else {
-                var boweffect: MyBitmap = new MyBitmap(RES.getRes('boweffect_png'), this.zhaoyunrole.x, this.zhaoyunrole.y);
+                var boweffect: MyBitmap = new MyBitmap(RES.getRes('boweffect_png'), this.zhaoyunrole.x+50*this.zhaoyunrole.$getScaleX(), this.zhaoyunrole.y-20);
                 this.parent.addChild(boweffect);
+                var rot = Math.atan((enemysp.getsp().y - this.zhaoyunrole.y) / (enemysp.getsp().x - this.zhaoyunrole.x)) * 180 / Math.PI;
+                if (enemysp.getsp().x < this.zhaoyunrole.x) {
+                    rot += 180;
+                }
+                //console.log('rot=====', rot);
+                boweffect.$setRotation(rot);
                 egret.Tween.get(boweffect).to({ x: enemysp.getsp().x, y: enemysp.getsp().y }, 200).call(function () {
                     boweffect.parent.removeChild(boweffect);
-                    enemysp.beatt(1);
+                    if (enemysp.parent != null) {
+                        enemysp.beatt(GameConfig.PLAYERBOWPOW);
+                    }
                 }, this);
-
+                //enemysp.beatt(1);
                 break;
             }
         }
@@ -124,9 +131,9 @@ class Player extends GameUtil.BassPanel {
     /**移动 */
     private moving() {
 
-        if (!this.checkrun()) {
-            return;
-        }
+        // if (!this.checkrun()) {
+        //     return;
+        // }
 
         var speed: number = PlayerData._i().speed;
         switch (PlayerData._i().curDir) {
@@ -232,7 +239,7 @@ class Player extends GameUtil.BassPanel {
     private powatt() {
         if (PlayerData._i().curenergy >= GameConfig.PLAYERENERGY) {
 
-            var poweffect:Animation = new Animation('poweffect', 30, 100, this.mStageW / 2, this.mStageH / 2);
+            var poweffect: Animation = new Animation('poweffect', 18, 100, this.mStageW / 2, this.mStageH / 2);
             this.addChild(poweffect);
             poweffect.play();
 

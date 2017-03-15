@@ -30,8 +30,6 @@ var SceneEffect;
 var GameConfig = (function () {
     /**开发游戏配置结束 */
     function GameConfig() {
-        this.stageH = 0; //视窗高
-        this.stageW = 0; //视窗宽
         this.initconfigdata();
     }
     var d = __define,c=GameConfig,p=c.prototype;
@@ -48,13 +46,11 @@ var GameConfig = (function () {
         this.bgamemusic = parseInt(GameUtil.readLocalData(GameConfig.GAMEMUSIC)) == 1 ? true : false;
         this.bgamesound = parseInt(GameUtil.readLocalData(GameConfig.GAMESOUND)) == 1 ? true : false;
     };
-    /**获取视窗高 */
-    GameConfig.getSH = function () {
-        return egret.MainContext.instance.stage.stageHeight;
-    };
-    /**获取视窗宽 */
     GameConfig.getSW = function () {
         return egret.MainContext.instance.stage.stageWidth;
+    };
+    GameConfig.getSH = function () {
+        return egret.MainContext.instance.stage.stageHeight;
     };
     GameConfig._i = function () {
         if (this._instance == null) {
@@ -66,7 +62,7 @@ var GameConfig = (function () {
     GameConfig.DEBUG = true;
     GameConfig.IP = "api.h5.gamexun.com"; //http连接地址
     GameConfig.GAMENAME = 'bubblefightv02'; //游戏在服务器上的名字
-    GameConfig.SERVERNAME = 'paopao'; //服务器连接名
+    GameConfig.SERVERNAME = 'children'; //服务器连接名
     GameConfig.FIRSTGAME = 'firstgame'; //第一次进游戏标示
     GameConfig.GAMESOUND = 'gamesound'; //游戏音效
     GameConfig.GAMEMUSIC = 'gamemusic'; //游戏音乐
@@ -75,10 +71,15 @@ var GameConfig = (function () {
     GameConfig.GUIDESTEPNUM = 2; //新手引导总步数
     GameConfig.DesignWidth = 750; //游戏设计尺寸宽
     GameConfig.DesignHeight = 1334; //游戏设计尺寸高
+    GameConfig.WeiXinstr = 'micromessenger'; //常用判断类型
+    GameConfig.Androidstr = 'android';
+    GameConfig.Iphone = 'iPhone';
     /**基本配置结束 */
     /**开发游戏配置 */
-    GameConfig.PLAYERLIFE = 100;
-    GameConfig.PLAYERENERGY = 100;
+    GameConfig.PLAYERLIFE = 20; //玩家血量值
+    GameConfig.PLAYERENERGY = 20; //玩家能量值
+    GameConfig.PLAYERSPEARPOW = 2; //玩家近身攻击力
+    GameConfig.PLAYERBOWPOW = 1; //玩家远程攻击力
     GameConfig._instance = null;
     return GameConfig;
 }());

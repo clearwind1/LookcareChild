@@ -13,7 +13,7 @@ class GameConfig {
     public static DEBUG: boolean = true;
     public static IP: string = "api.h5.gamexun.com";        //http连接地址
     public static GAMENAME: string = 'bubblefightv02';      //游戏在服务器上的名字
-    public static SERVERNAME: string = 'paopao';            //服务器连接名
+    public static SERVERNAME: string = 'children';            //服务器连接名
     public static FIRSTGAME: string = 'firstgame';          //第一次进游戏标示
     public static GAMESOUND: string = 'gamesound';          //游戏音效
     public static GAMEMUSIC: string = 'gamemusic';          //游戏音乐
@@ -25,8 +25,9 @@ class GameConfig {
     public static DesignWidth: number = 750;         //游戏设计尺寸宽
     public static DesignHeight: number = 1334;       //游戏设计尺寸高
 
-    private stageH: number = 0;                     //视窗高
-    private stageW: number = 0;                     //视窗宽
+    public static WeiXinstr: string = 'micromessenger'; //常用判断类型
+    public static Androidstr: string = 'android';
+    public static Iphone: string = 'iPhone';
 
     public bfirstplay: boolean;                     //是否第一次进入游戏
     public bgamesound: boolean;                     //是否开启游戏音效
@@ -35,8 +36,10 @@ class GameConfig {
     /**基本配置结束 */
 
     /**开发游戏配置 */
-    public static PLAYERLIFE: number = 100;
-    public static PLAYERENERGY: number = 100;
+    public static PLAYERLIFE: number = 20;          //玩家血量值
+    public static PLAYERENERGY: number = 20;        //玩家能量值
+    public static PLAYERSPEARPOW: number = 2;       //玩家近身攻击力
+    public static PLAYERBOWPOW: number = 1;         //玩家远程攻击力
     /**开发游戏配置结束 */
 
     public constructor() {
@@ -56,13 +59,12 @@ class GameConfig {
         this.bgamesound = parseInt(GameUtil.readLocalData(GameConfig.GAMESOUND)) == 1 ? true : false;
 
     }
-    /**获取视窗高 */
-    public static getSH(): number {
-        return egret.MainContext.instance.stage.stageHeight;
-    }
-    /**获取视窗宽 */
+
     public static getSW(): number {
         return egret.MainContext.instance.stage.stageWidth;
+    }
+    public static getSH(): number {
+        return egret.MainContext.instance.stage.stageHeight;
     }
 
     private static _instance: GameConfig = null;

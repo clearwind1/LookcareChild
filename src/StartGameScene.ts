@@ -1,6 +1,7 @@
 /**
  * Created by pior on 16/9/9.
  */
+
 class StartGameScene extends GameUtil.BassPanel {
 
     public constructor() {
@@ -9,7 +10,22 @@ class StartGameScene extends GameUtil.BassPanel {
 
     public init() {
         BGMPlayer._i().play(SoundName.startgamebgm);
-        this.showbg();
+
+        var param: Object = {
+            clickopenid: '1'
+        }
+        GameUtil.Http.getinstance().send(param, "/" + GameConfig.SERVERNAME + "/getuserid", this.show, this);
+    }
+    private show(data:any)
+    {
+        if (data['code'] == 1) {
+            this.showbg();
+            PlayerData._i().UserInfo.ID = data['userid'];
+            //console.log('PlayerData._i().UserInfo.ID=========', PlayerData._i().UserInfo.ID);
+        }
+        else {
+            GameUtil.trace(data['msg']);
+        }
     }
     /**显示背景界面 */
     private showbg() {
@@ -29,6 +45,9 @@ class StartGameScene extends GameUtil.BassPanel {
             this.addChild(btn);
             btn.setBtnSound(GameData._i().gamesound[SoundName.click]);
             GameUtil.relativepos(btn, bg, btnpox[i], btnpoy[i]);
+            if (i == 4) {
+                btn.x = this.mStageW - 100;
+            }
         }
 
         if (!GameConfig.DEBUG) {
@@ -82,7 +101,7 @@ class StartGameScene extends GameUtil.BassPanel {
     /**游戏分享 */
     private share() {
         GameUtil.trace('share');
-         if (!GameUtil.isWeiXin()) {
+         if (!GameUtil.isSomeType(GameConfig.WeiXinstr)) {
             this.addChild(new GameUtil.TipsPanel(null, '请在微信中打开', true));
          } else {
              this.addChild(new SharePageShow());

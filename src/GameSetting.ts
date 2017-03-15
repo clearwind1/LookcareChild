@@ -14,7 +14,7 @@ class GameSetting extends Othercontainer
     protected show()
     {
         this.soundswitch[1] = GameConfig._i().bgamesound;
-        this.soundswitch[0] = GameConfig._i().bgamemusic;
+        this.soundswitch[0] = GameConfig._i().bgamemusic;   
 
         this.switchbtn = [];
 

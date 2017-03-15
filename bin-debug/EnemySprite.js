@@ -20,7 +20,12 @@ var EnemySprite = (function (_super) {
     p.init = function () {
         //console.log('type====', this.type);
         this.intervalarr = [];
-        this.gamelevel = (GameData._i().GameLevel % 8) + 1;
+        this.gamelevel = RandomUtils.limitInteger(1, 8);
+        if (this.gamelevel == 8) {
+            if (RandomUtils.limitInteger(0, 100) < 50) {
+                this.gamelevel = RandomUtils.limitInteger(1, 7);
+            }
+        }
         this.bdie = false;
         /**创建角色 */
         this.anispeed = GameUtil.MAX(30, 80 - GameData._i().GameLevel);
@@ -33,7 +38,7 @@ var EnemySprite = (function (_super) {
         this.sp.setLoop(-1);
         this.sp.play();
         /**创建生命条 */
-        this.life = new Lifesprite(2 + GameData._i().GameLevel * 2);
+        this.life = new Lifesprite(this.gamelevel);
         this.life.$setScaleX(0.7);
         this.life.$setScaleY(0.7);
         this.life.x = this.sp.x;
@@ -56,20 +61,22 @@ var EnemySprite = (function (_super) {
     /**攻击动作 */
     p.att = function () {
         var enemyname = 'enemyatt' + this.gamelevel;
-        this.sp.switchani(enemyname, this.spframe[RoleState.ATT], -1);
-        this.intervalarr.push(egret.setInterval(this.attplayer, this, this.anispeed * this.spframe[RoleState.ATT]));
+        this.sp.switchani(enemyname, this.spframe[RoleState.ATT], 0, true, 40);
+        //this.intervalarr.push(egret.setInterval(this.attplayer, this, this.anispeed * this.spframe[RoleState.ATT]));
+        this.sp.setendcall(this.attplayer, this);
     };
     /**定时攻击 */
     p.attplayer = function () {
         PlayerData._i().curlife--;
         (GameUtil.GameScene.curScene).getPlayer().updatalife();
+        this.parent.removeChild(this);
     };
     /**被攻击 */
     p.beatt = function (attpow, bpowatt) {
         if (bpowatt === void 0) { bpowatt = false; }
         GameData._i().gamesound[SoundName.beatt].play();
         this.life.sublife(attpow);
-        if (this.life.getlife() <= 0) {
+        if (!this.bdie && this.life.getlife() <= 0) {
             this.die(bpowatt);
         }
     };
@@ -88,7 +95,7 @@ var EnemySprite = (function (_super) {
         /**死亡效果 */
         var self = this;
         egret.Tween.get(this).to({ visible: false }, 100).to({ visible: true }, 100).to({ visible: false }, 100).to({ visible: true }, 100).to({ visible: false }, 100).call(function () {
-            this.parent.removeChild(this);
+            self.parent.removeChild(self);
             GameData._i().gamesound[SoundName.die].play();
             GameData._i().gamesound[SoundName.goal].play();
             if (self.gamelevel == 8) {
@@ -96,6 +103,12 @@ var EnemySprite = (function (_super) {
             }
             else {
                 PlayerData._i().UserInfo.killsoldier++;
+            }
+            if (self.gamelevel % 8 == 0) {
+                PlayerData._i().UserInfo.jifen += (2 + GameData._i().GameLevel * 4);
+            }
+            else {
+                PlayerData._i().UserInfo.jifen += (2 + GameData._i().GameLevel * 2);
             }
             if (!bpowatt) {
                 /**玩家获得能量 */

@@ -2,18 +2,15 @@
  * 滚动框
  * Created by pior on 15/11/3.
  */
-module GameUtil
-{
+module GameUtil {
     /**
      * 创建一个滚动框
      */
-    export class ScrollView extends egret.DisplayObjectContainer
-    {
+    export class ScrollView extends egret.DisplayObjectContainer {
         private scrollview: egret.ScrollView;
         private content: egret.DisplayObjectContainer;
 
-        public constructor(swidth:number,sheight:number,speed:number=0.5)
-        {
+        public constructor(swidth: number, sheight: number, speed: number = 0.5) {
             super();
             this.scrollview = new egret.ScrollView();
             this.content = new egret.DisplayObjectContainer();
@@ -25,8 +22,7 @@ module GameUtil
             this.init();
         }
 
-        private init():void
-        {
+        private init(): void {
             this.scrollview.setContent(this.content);
         }
 
@@ -34,24 +30,24 @@ module GameUtil
          * 添加滚动元素
          * @param item {any} 元素
          */
-        public putItem(item:any):void
-        {
+        public putItem(item: any): void {
             this.content.addChild(item);
         }
 
-        public clearItem():void
-        {
+        public clearItem(): void {
             this.content.removeChildren();
         }
 
-        public getScorllTop():number
-        {
+        public getScorllTop(): number {
             return this.scrollview.scrollTop;
         }
 
-        public setScorllTop(value:number):void
-        {
+        public setScorllTop(value: number): void {
             this.scrollview.scrollTop = value;
+        }
+
+        public getScorllView(): egret.ScrollView {
+            return this.scrollview;
         }
 
     }

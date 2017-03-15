@@ -148,22 +148,10 @@ module GameUtil {
         }
         GameUtil.Http.getinstance().send(param, "/weixinpay/pay", backfun, cont, url);
     }
-    /**是否微信 */
-    export function isWeiXin(): boolean {
+    /**判断类型 */
+    export function isSomeType(type: string) {
         var ua = window.navigator.userAgent.toLowerCase();
-        // alert('isweixin:'+ua.indexOf('micromessenger'));
-        if (ua.indexOf('micromessenger') != -1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**是否安卓 */
-    export function isAndroid(): boolean {
-        var ua = window.navigator.userAgent.toLowerCase();
-        // alert('isAndroid:'+ua.indexOf('android'));
-        if (ua.indexOf('android') != -1) {
+        if (ua.indexOf(type) != -1) {
             return true;
         } else {
             return false;
@@ -221,13 +209,14 @@ module GameUtil {
         //trace('clear interval====');
         for (var i: number = 0; i < intervalarr.length; i++) {
             var interval: number = intervalarr[i];
-            var index: number = intervalarr.indexOf(interval);
-            if (index > -1) {
+            //var index: number = intervalarr.indexOf(interval);
+            //if (index > -1) {
                 egret.clearInterval(interval);
-                intervalarr.splice(index, 1);
-            }
+                //intervalarr.splice(index, 1);
+            //}
 
         }
+        intervalarr = [];
     }
 
 }

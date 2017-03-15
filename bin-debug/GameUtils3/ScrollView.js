@@ -40,6 +40,9 @@ var GameUtil;
         p.setScorllTop = function (value) {
             this.scrollview.scrollTop = value;
         };
+        p.getScorllView = function () {
+            return this.scrollview;
+        };
         return ScrollView;
     }(egret.DisplayObjectContainer));
     GameUtil.ScrollView = ScrollView;

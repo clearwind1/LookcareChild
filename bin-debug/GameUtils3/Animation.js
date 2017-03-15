@@ -75,15 +75,17 @@ var Animation = (function (_super) {
         this.setNewTexture(RES.getRes(this.textureName + this.currentNumber + '_png'));
     };
     /**切换动画 */
-    p.switchani = function (textureName, totalNumber, loopcount, bremove) {
+    p.switchani = function (textureName, totalNumber, loopcount, bremove, frameRate) {
         if (loopcount === void 0) { loopcount = -1; }
         if (bremove === void 0) { bremove = true; }
+        if (frameRate === void 0) { frameRate = this.frameRate; }
         this.stop();
         this.textureName = textureName;
         this.totalNumber = totalNumber;
         this.currentNumber = 0;
         this.bLoopCount = loopcount;
         this.bremove = bremove;
+        this.frameRate = frameRate;
         this.play();
     };
     /**

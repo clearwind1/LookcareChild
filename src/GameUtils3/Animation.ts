@@ -91,13 +91,14 @@ class Animation extends MyBitmap {
         this.setNewTexture(RES.getRes(this.textureName + this.currentNumber + '_png'));
     }
     /**切换动画 */
-    public switchani(textureName: string, totalNumber: number, loopcount: number = -1, bremove: boolean = true) {
+    public switchani(textureName: string, totalNumber: number, loopcount: number = -1, bremove: boolean = true, frameRate: number = this.frameRate) {
         this.stop();
         this.textureName = textureName;
         this.totalNumber = totalNumber;
         this.currentNumber = 0;
         this.bLoopCount = loopcount;
         this.bremove = bremove;
+        this.frameRate = frameRate;
         this.play();
     }
 

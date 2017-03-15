@@ -9,7 +9,7 @@ var GameOverPageShow = (function (_super) {
     }
     var d = __define,c=GameOverPageShow,p=c.prototype;
     p.show = function () {
-        if (GameConfig.DEBUG) {
+        if (!GameConfig.DEBUG) {
             var data = {
                 'code': 1
             };
@@ -17,15 +17,15 @@ var GameOverPageShow = (function (_super) {
         }
         else {
             var param = {
-                openid: PlayerData._i().UserInfo.openid,
-                counts: PlayerData._i().UserInfo.killsoldier,
-                countg: PlayerData._i().UserInfo.killgengeral
+                id: PlayerData._i().UserInfo.ID,
+                score: PlayerData._i().UserInfo.jifen
             };
-            GameUtil.Http.getinstance().send(param, "/" + GameConfig.SERVERNAME + "/updatekilldata", this.showscene, this);
+            GameUtil.Http.getinstance().send(param, "/" + GameConfig.SERVERNAME + "/addrank", this.showscene, this);
         }
     };
     /**显示 */
     p.showscene = function (data) {
+        console.log('data-====', data['msg']);
         if (data['code'] == 1) {
             var gameoverbg = new MyBitmap(RES.getRes('gameoverbg_png'), this.mStageW / 2, this.mStageH / 2);
             this.addChild(gameoverbg);
@@ -50,7 +50,7 @@ var GameOverPageShow = (function (_super) {
             var usetime = DateUtils.getFormatBySecond(gamescene.getcurTime());
             var infoData = [PlayerData._i().UserInfo.killsoldier, usetime, PlayerData._i().UserInfo.killgeneral, PlayerData._i().UserInfo.jifen];
             for (var i = 0; i < 4; i++) {
-                var textposx = 100;
+                var textposx = 60;
                 var textposy = 115;
                 /**固定数据信息文字 */
                 var infoT = new GameUtil.MyTextField(0, 0 + 60 * i, 50, 0, 0);
@@ -72,7 +72,7 @@ var GameOverPageShow = (function (_super) {
     };
     /**分享 */
     p.share = function () {
-        if (!GameUtil.isWeiXin()) {
+        if (!GameUtil.isSomeType(GameConfig.WeiXinstr)) {
             this.addChild(new GameUtil.TipsPanel(null, '请在微信中打开', true));
         }
         else {

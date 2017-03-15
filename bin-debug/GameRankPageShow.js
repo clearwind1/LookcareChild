@@ -28,7 +28,8 @@ var GameRankPageShow = (function (_super) {
             var rankcontainsv = new GameUtil.ScrollView(518, 450);
             this.addChild(rankcontainsv);
             GameUtil.relativepos(rankcontainsv, rankbg, 62, 142);
-            for (var i = 0; i < 20; i++) {
+            console.log('result====', result.length);
+            for (var i = 0; i < result.length; i++) {
                 var coverb = new MyBitmap(RES.getRes('rankcontain' + (i % 7) + '_png'), 259, 26 + i * 64);
                 rankcontainsv.putItem(coverb);
                 var ranknum = new MyBitmap(RES.getRes('ranknum_png'), 45, 30 + i * 64);
@@ -38,13 +39,11 @@ var GameRankPageShow = (function (_super) {
                 ranknt.textColor = 0xa96100;
                 rankcontainsv.putItem(ranknt);
                 var playname = new GameUtil.MyTextField(235, 26 + i * 64, 40, 0.5);
-                //playname.setText('test1' + result[i]['nickname']);
-                playname.setText('test' + i);
+                playname.setText('sxd-' + result[i]['id']);
                 playname.textColor = 0xffffff;
                 rankcontainsv.putItem(playname);
                 var playscore = new GameUtil.MyTextField(423, 26 + i * 64, 40, 0.5);
-                //playscore.setText('' + result[i]['jifen']);
-                playscore.setText(100 + i + '');
+                playscore.setText('' + result[i]['score']);
                 playscore.textColor = 0xffffff;
                 rankcontainsv.putItem(playscore);
             }

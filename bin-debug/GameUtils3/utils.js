@@ -160,30 +160,17 @@ var GameUtil;
         GameUtil.Http.getinstance().send(param, "/weixinpay/pay", backfun, cont, url);
     }
     GameUtil.getredPack = getredPack;
-    /**是否微信 */
-    function isWeiXin() {
+    /**判断类型 */
+    function isSomeType(type) {
         var ua = window.navigator.userAgent.toLowerCase();
-        // alert('isweixin:'+ua.indexOf('micromessenger'));
-        if (ua.indexOf('micromessenger') != -1) {
+        if (ua.indexOf(type) != -1) {
             return true;
         }
         else {
             return false;
         }
     }
-    GameUtil.isWeiXin = isWeiXin;
-    /**是否安卓 */
-    function isAndroid() {
-        var ua = window.navigator.userAgent.toLowerCase();
-        // alert('isAndroid:'+ua.indexOf('android'));
-        if (ua.indexOf('android') != -1) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    GameUtil.isAndroid = isAndroid;
+    GameUtil.isSomeType = isSomeType;
     /**
      * 定位相对位置
      * @param objtarget     要改变位置的对象
@@ -246,12 +233,11 @@ var GameUtil;
         //trace('clear interval====');
         for (var i = 0; i < intervalarr.length; i++) {
             var interval = intervalarr[i];
-            var index = intervalarr.indexOf(interval);
-            if (index > -1) {
-                egret.clearInterval(interval);
-                intervalarr.splice(index, 1);
-            }
+            //var index: number = intervalarr.indexOf(interval);
+            //if (index > -1) {
+            egret.clearInterval(interval);
         }
+        intervalarr = [];
     }
     GameUtil.clearinterval = clearinterval;
 })(GameUtil || (GameUtil = {}));

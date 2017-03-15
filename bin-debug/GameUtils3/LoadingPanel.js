@@ -26,7 +26,9 @@ var GameUtil;
         p.init = function () {
             //RES.getResByUrl(this.imageUrl,this.onComplete,this,RES.ResourceItem.TYPE_IMAGE);
             new GameUtil.LoadingLogopre(this.onComplete, this);
-            this.loadsound();
+            if (!GameUtil.isSomeType(GameConfig.Iphone)) {
+                this.loadsound();
+            }
         };
         p.loadsound = function () {
             for (var i = 0; i < GameConfig.SoundName.length; i++) {
