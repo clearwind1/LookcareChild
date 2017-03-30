@@ -227,7 +227,7 @@ var Player = (function (_super) {
         this.energymask = GameUtil.createRect(42, 150, this.energy.width, this.energy.height);
         this.addChild(this.energymask);
         this.energy.mask = this.energymask;
-        //this.updataenergy();
+        this.updataenergy(GameConfig.PLAYERENERGY);
     };
     /**能量满，放技能*/
     p.powatt = function () {

@@ -15,7 +15,7 @@ class Player extends GameUtil.BassPanel {
     private life: Lifesprite;       //生命血量
 
     private adourole: Animation;    //阿斗
-    public zhaoyunrole: Animation; //赵云
+    public zhaoyunrole: Animation; //赵云 
     private zyaniname: string[][] = [['spearrun', 'spearatt'], ['bowrun', 'bowatt']];
     private zyaniframe: number[][] = [[8, 10], [8, 5]];
     private rolelayer: egret.DisplayObjectContainer;
@@ -233,7 +233,7 @@ class Player extends GameUtil.BassPanel {
         this.addChild(this.energymask);
         this.energy.mask = this.energymask;
 
-        //this.updataenergy();
+        this.updataenergy(GameConfig.PLAYERENERGY);
     }
     /**能量满，放技能*/
     private powatt() {

@@ -25,7 +25,7 @@ var PlayerData = (function () {
         this.curweapon = (this.curweapon == Weapon.END) ? Weapon.SPEAR : this.curweapon;
         this.curDir = Direction.END;
         this.curlife = GameConfig.PLAYERLIFE;
-        this.curenergy = 0;
+        this.curenergy = GameConfig.PLAYERENERGY;
     };
     PlayerData._i = function () {
         return (this._inst = (this._inst == null ? new PlayerData() : this._inst));

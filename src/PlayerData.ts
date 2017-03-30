@@ -33,7 +33,7 @@ class PlayerData {
         this.curweapon = (this.curweapon == Weapon.END) ? Weapon.SPEAR : this.curweapon;
         this.curDir = Direction.END;
         this.curlife = GameConfig.PLAYERLIFE;
-        this.curenergy = 0;
+        this.curenergy = GameConfig.PLAYERENERGY;
     }
 
     private static _inst: PlayerData = null;

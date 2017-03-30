@@ -37,9 +37,7 @@ module GameUtil
         {
             //RES.getResByUrl(this.imageUrl,this.onComplete,this,RES.ResourceItem.TYPE_IMAGE);
             new GameUtil.LoadingLogopre(this.onComplete, this);
-            if (!GameUtil.isSomeType(GameConfig.Iphone)) {
-                this.loadsound();
-            }
+            this.loadsound();
         }
         private loadsound()
         {
